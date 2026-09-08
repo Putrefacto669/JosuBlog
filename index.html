@@ -1,0 +1,3944 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>✖ JOSU ✖ ~ josu ~ nicotina &amp; neón</title>
+    <meta name="description"
+        content="blog personal de josu. 21, insomnio crónico, Cry of Fear, café pasado y cigarrillos en el balcón.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --negro: #050505;
+            --sangre: #8b0000;
+            --sangre-claro: #c0143c;
+            --morado: #2a0030;
+            --morado-neon: #b366ff;
+            --gris: #111;
+            --texto: #c9c9c9;
+            --verde-monster: #00b140;
+            --ambar: #ff7a18;
+            --ceniza: #9a9a9a;
+            --piel: #d9a06f;
+            --pixel: 'Press Start 2P', monospace;
+            --term: 'VT323', monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html {
+            scrollbar-width: thin;
+            scrollbar-color: var(--sangre) #000;
+        }
+
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: #000;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(var(--sangre), var(--morado));
+            border: 1px solid #000;
+        }
+
+        ::selection {
+            background: var(--sangre);
+            color: #fff;
+        }
+
+        body {
+            margin: 0;
+            background: #000;
+            background-image:
+                radial-gradient(circle at 20% 10%, rgba(139, 0, 0, 0.25), transparent 40%),
+                radial-gradient(circle at 80% 90%, rgba(42, 0, 48, 0.45), transparent 45%),
+                repeating-linear-gradient(45deg, #030303 0px, #030303 2px, #0a0a0a 2px, #0a0a0a 4px);
+            color: var(--texto);
+            font-family: 'Trebuchet MS', Verdana, sans-serif;
+            font-size: 14px;
+            line-height: 1.55;
+            cursor: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='30' height='30'><g transform='rotate(45 15 15)'><rect x='4' y='13' width='17' height='5' fill='%23e8e8e8'/><rect x='19' y='13' width='8' height='5' rx='1.5' fill='%23d98e32'/><rect x='1' y='13' width='4' height='5' fill='%23ff4b1f'/></g></svg>") 3 24, crosshair;
+            overflow-x: hidden;
+        }
+
+        body.pov-on {
+            overflow: hidden;
+        }
+
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            background: repeating-linear-gradient(0deg, rgba(0, 0, 0, .22) 0 1px, transparent 1px 3px);
+            pointer-events: none;
+            z-index: 9997;
+        }
+
+        .vignette {
+            position: fixed;
+            inset: 0;
+            background: radial-gradient(ellipse at center, transparent 55%, rgba(0, 0, 0, .75) 100%);
+            pointer-events: none;
+            z-index: 9996;
+        }
+
+        #humo {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 9998;
+        }
+
+        .ceniza {
+            position: fixed;
+            top: -12px;
+            width: 3px;
+            height: 3px;
+            border-radius: 50%;
+            opacity: .6;
+            pointer-events: none;
+            animation: caer linear infinite;
+            z-index: 9995;
+        }
+
+        @keyframes caer {
+            to {
+                transform: translateY(105vh) rotate(360deg);
+                opacity: 0;
+            }
+        }
+
+        .marco {
+            max-width: 920px;
+            margin: 24px auto;
+            background: rgba(8, 8, 8, .93);
+            border: 3px double var(--sangre);
+            box-shadow: 0 0 35px rgba(139, 0, 0, .55), inset 0 0 40px rgba(0, 0, 0, .85);
+            position: relative;
+        }
+
+        header {
+            text-align: center;
+            padding: 28px 10px 16px;
+            border-bottom: 2px dashed var(--sangre-claro);
+            background: linear-gradient(180deg, rgba(42, 0, 48, .55), transparent);
+            position: relative;
+        }
+
+        .glitch {
+            font-family: var(--pixel);
+            font-size: clamp(18px, 4vw, 34px);
+            margin: 0;
+            letter-spacing: 2px;
+            color: #fff;
+            position: relative;
+            text-shadow: 3px 3px 0 #000;
+            animation: flicker 4s infinite;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            inset: 0;
+            overflow: hidden;
+        }
+
+        .glitch::before {
+            color: var(--sangre-claro);
+            animation: gshift 2.7s infinite steps(2);
+            clip-path: polygon(0 0, 100% 0, 100% 38%, 0 38%);
+        }
+
+        .glitch::after {
+            color: var(--morado-neon);
+            animation: gshift 3.3s infinite steps(2) reverse;
+            clip-path: polygon(0 62%, 100% 62%, 100% 100%, 0 100%);
+        }
+
+        @keyframes gshift {
+
+            0%,
+            84%,
+            100% {
+                transform: translate(0);
+                opacity: .85;
+            }
+
+            86% {
+                transform: translate(-4px, -2px);
+            }
+
+            90% {
+                transform: translate(4px, 1px);
+            }
+
+            94% {
+                transform: translate(-2px, 2px);
+            }
+        }
+
+        @keyframes flicker {
+
+            0%,
+            100% {
+                opacity: 1;
+            }
+
+            92% {
+                opacity: 1;
+            }
+
+            93% {
+                opacity: .4;
+            }
+
+            94% {
+                opacity: 1;
+            }
+
+            96% {
+                opacity: .6;
+            }
+
+            97% {
+                opacity: 1;
+            }
+        }
+
+        .sub {
+            font-family: var(--term);
+            color: var(--sangre-claro);
+            font-size: 19px;
+            letter-spacing: 2px;
+            margin-top: 8px;
+        }
+
+        marquee {
+            color: var(--verde-monster);
+            font-family: var(--term);
+            font-size: 18px;
+            letter-spacing: 2px;
+            padding: 5px 0;
+            background: #000;
+            border-bottom: 1px solid var(--sangre);
+        }
+
+        .contenido {
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        .sidebar {
+            width: 250px;
+            padding: 15px;
+            border-right: 2px dashed var(--sangre);
+            background: rgba(20, 0, 20, .45);
+            flex-shrink: 0;
+        }
+
+        .main {
+            flex: 1;
+            min-width: 300px;
+            padding: 15px 20px;
+        }
+
+        .caja {
+            border: 1px solid var(--sangre);
+            background: rgba(0, 0, 0, .55);
+            margin-bottom: 15px;
+            padding: 10px;
+        }
+
+        .caja h3 {
+            margin: 0 0 8px;
+            font-family: var(--pixel);
+            color: var(--sangre-claro);
+            font-size: 11px;
+            border-bottom: 1px dotted var(--sangre);
+            padding-bottom: 6px;
+            text-transform: lowercase;
+            line-height: 1.7;
+        }
+
+        .perfil-img {
+            width: 110px;
+            height: 110px;
+            display: block;
+            margin: 0 auto 10px;
+            border: 2px solid var(--sangre-claro);
+            background:
+                radial-gradient(circle at 65% 35%, rgba(179, 102, 255, .5), transparent 45%),
+                linear-gradient(135deg, #1a0020, #8b0000);
+            filter: grayscale(.4) contrast(1.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .perfil-img::after {
+            content: '🚬';
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            font-size: 44px;
+            filter: drop-shadow(0 0 8px rgba(255, 122, 24, .8));
+        }
+
+        .stats {
+            font-size: 12.5px;
+        }
+
+        .stats b {
+            color: var(--verde-monster);
+        }
+
+        nav a {
+            display: block;
+            color: var(--texto);
+            text-decoration: none;
+            padding: 4px 0;
+            font-family: var(--term);
+            font-size: 17px;
+            transition: .2s;
+        }
+
+        nav a:hover {
+            color: var(--sangre-claro);
+            text-shadow: 0 0 8px var(--sangre-claro);
+            transform: translateX(8px);
+        }
+
+        .post {
+            border-left: 4px solid var(--sangre);
+            background: linear-gradient(90deg, rgba(139, 0, 0, .13), transparent);
+            padding: 12px 14px;
+            margin-bottom: 20px;
+            transition: .25s;
+        }
+
+        .post:hover {
+            border-left-color: var(--ambar);
+            background: linear-gradient(90deg, rgba(255, 122, 24, .08), transparent);
+            box-shadow: -4px 0 18px -6px var(--ambar);
+        }
+
+        .post .fecha {
+            font-size: 11px;
+            color: #777;
+            font-family: var(--term);
+            font-size: 15px;
+        }
+
+        .post h2 {
+            font-family: var(--pixel);
+            color: #fff;
+            font-size: 14px;
+            margin: 6px 0;
+            line-height: 1.8;
+            text-shadow: 1px 1px 0 var(--sangre);
+        }
+
+        .post p {
+            margin: 6px 0;
+        }
+
+        .post-attach {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin: 10px 0;
+        }
+
+        .post-attach img,
+        .post-attach video {
+            max-width: 280px;
+            max-height: 280px;
+            border: 1px solid var(--sangre);
+            display: block;
+            background: #000;
+        }
+
+        .post-attach audio {
+            width: 100%;
+            display: block;
+        }
+
+        .post-attach iframe {
+            width: 100%;
+            height: 260px;
+            border: 1px solid var(--sangre);
+            background: #000;
+            display: block;
+        }
+
+        .post-attach a {
+            font-family: var(--term);
+            font-size: 15px;
+        }
+
+        #nowPlayingBody .small a {
+            font-family: var(--term);
+        }
+
+        .tag {
+            display: inline-block;
+            font-family: var(--term);
+            font-size: 13px;
+            background: transparent;
+            border: 1px solid var(--sangre);
+            color: var(--sangre-claro);
+            padding: 0 7px;
+            border-radius: 8px;
+            margin-right: 4px;
+        }
+
+        .post:hover .tag {
+            border-color: var(--ambar);
+            color: var(--ambar);
+        }
+
+        .monster {
+            color: var(--verde-monster);
+            font-weight: bold;
+            text-shadow: 0 0 6px rgba(0, 177, 64, .6);
+        }
+
+        .nico {
+            color: var(--ambar);
+            text-shadow: 0 0 6px rgba(255, 122, 24, .6);
+        }
+
+        blockquote {
+            border-left: 3px solid var(--morado-neon);
+            margin: 8px 0;
+            padding: 4px 10px;
+            font-style: italic;
+            color: #b98ec0;
+        }
+
+        .blinkies {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            justify-content: center;
+            margin: 10px 0;
+        }
+
+        .blinkie {
+            font-family: var(--pixel);
+            font-size: 7px;
+            padding: 5px 8px;
+            border: 1px solid var(--sangre-claro);
+            background: #000;
+            color: var(--sangre-claro);
+            border-radius: 3px;
+            animation: glow 1.2s infinite alternate;
+            white-space: nowrap;
+            line-height: 1.6;
+        }
+
+        @keyframes glow {
+            from {
+                box-shadow: 0 0 2px var(--sangre-claro);
+            }
+
+            to {
+                box-shadow: 0 0 12px var(--sangre-claro);
+            }
+        }
+
+        .divider {
+            text-align: center;
+            color: var(--ambar);
+            letter-spacing: 5px;
+            margin: 12px 0;
+        }
+
+        .gb-entry {
+            border: 1px dotted #444;
+            padding: 6px 8px;
+            margin-bottom: 6px;
+            font-size: 12.5px;
+        }
+
+        .gb-entry .who {
+            color: var(--verde-monster);
+            font-weight: bold;
+        }
+
+        textarea,
+        input[type=text],
+        input[type=password],
+        input[type=url],
+        select {
+            width: 100%;
+            background: #000;
+            border: 1px solid var(--sangre);
+            color: var(--texto);
+            font-family: var(--term);
+            font-size: 16px;
+            padding: 6px;
+            margin-top: 4px;
+        }
+
+        textarea:focus,
+        input:focus {
+            outline: none;
+            border-color: var(--ambar);
+            box-shadow: 0 0 8px rgba(255, 122, 24, .4);
+        }
+
+        button {
+            background: var(--sangre);
+            color: #fff;
+            border: none;
+            padding: 7px 15px;
+            cursor: inherit;
+            font-family: var(--pixel);
+            font-size: 9px;
+            margin-top: 6px;
+            border-radius: 3px;
+            transition: .2s;
+        }
+
+        button:hover {
+            background: var(--sangre-claro);
+            box-shadow: 0 0 12px rgba(192, 20, 60, .7);
+        }
+
+        button:disabled {
+            background: #333;
+            color: #666;
+            box-shadow: none;
+        }
+
+        .btn-fumar {
+            background: #3a2200;
+            border: 1px solid var(--ambar);
+            color: var(--ambar);
+        }
+
+        .btn-fumar:hover:not(:disabled) {
+            background: var(--ambar);
+            color: #000;
+            box-shadow: 0 0 16px rgba(255, 122, 24, .8);
+        }
+
+        footer {
+            text-align: center;
+            padding: 15px;
+            border-top: 2px dashed var(--sangre);
+            font-size: 11px;
+            color: #666;
+            position: relative;
+        }
+
+        footer a {
+            color: var(--sangre-claro);
+        }
+
+        .contador {
+            display: inline-block;
+            background: #000;
+            border: 1px solid var(--sangre);
+            color: var(--verde-monster);
+            font-family: var(--pixel);
+            font-size: 10px;
+            padding: 3px 7px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 5px rgba(0, 177, 64, .8);
+        }
+
+        .cursivo {
+            font-family: 'Comic Sans MS', cursive;
+        }
+
+        .small {
+            font-size: 11px;
+            color: #888;
+        }
+
+        .paquete-cigs {
+            text-align: center;
+        }
+
+        .pack-count {
+            font-family: var(--pixel);
+            font-size: 10px;
+            color: var(--ceniza);
+            letter-spacing: 1px;
+            margin: 4px 0;
+        }
+
+        .meter {
+            height: 10px;
+            background: #000;
+            border: 1px solid var(--sangre);
+            margin-top: 6px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .meter i {
+            display: block;
+            height: 100%;
+            width: 0%;
+            background: linear-gradient(90deg, #8b4500, var(--ambar));
+            box-shadow: 0 0 8px rgba(255, 122, 24, .7);
+            transition: width .6s;
+        }
+
+        .meter-label {
+            font-family: var(--term);
+            font-size: 15px;
+            color: var(--ambar);
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2px;
+        }
+
+        .estado-linea {
+            font-family: var(--term);
+            font-size: 16px;
+            color: var(--ceniza);
+            border-top: 1px dotted #333;
+            margin-top: 8px;
+            padding-top: 6px;
+        }
+
+        .estado-linea b {
+            color: var(--morado-neon);
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 18px;
+            left: 50%;
+            transform: translate(-50%, 80px);
+            background: #000;
+            border: 1px solid var(--ambar);
+            color: var(--ambar);
+            font-family: var(--term);
+            font-size: 17px;
+            padding: 8px 16px;
+            z-index: 10000;
+            opacity: 0;
+            transition: .35s;
+            pointer-events: none;
+            box-shadow: 0 0 18px rgba(255, 122, 24, .4);
+            max-width: 90vw;
+            text-align: center;
+        }
+
+        .toast.show {
+            transform: translate(-50%, 0);
+            opacity: 1;
+        }
+
+        .quote-rot {
+            font-family: var(--term);
+            font-size: 16px;
+            color: #b98ec0;
+            min-height: 22px;
+            transition: opacity .4s;
+        }
+
+        .webring a {
+            color: var(--morado-neon);
+            text-decoration: none;
+        }
+
+        .webring a:hover {
+            text-shadow: 0 0 6px var(--morado-neon);
+        }
+
+        .gear-box {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            opacity: .5;
+        }
+
+        .gear-box button {
+            background: transparent;
+            border: 1px solid #333;
+            color: #666;
+            font-family: var(--term);
+            font-size: 14px;
+            padding: 2px 8px;
+            margin: 0;
+        }
+
+        .gear-box button:hover {
+            border-color: var(--morado-neon);
+            color: var(--morado-neon);
+            box-shadow: none;
+            background: transparent;
+        }
+
+        /* ---------- POV ---------- */
+        #povWrap {
+            position: fixed;
+            inset: 0;
+            z-index: 9950;
+            visibility: hidden;
+            opacity: 0;
+            transition: opacity .45s;
+            pointer-events: none;
+        }
+
+        #povWrap.on {
+            visibility: visible;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #povWrap canvas {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            cursor: none;
+        }
+
+        .pov-hud {
+            position: absolute;
+            inset: 0;
+            font-family: var(--term);
+            pointer-events: none;
+        }
+
+        .pov-hud button {
+            pointer-events: auto;
+        }
+
+        .pov-tag {
+            position: absolute;
+            top: 14px;
+            left: 14px;
+            background: rgba(0, 0, 0, .65);
+            border: 1px solid var(--ambar);
+            color: var(--ambar);
+            padding: 3px 9px;
+            font-size: 16px;
+            letter-spacing: 1px;
+        }
+
+        .pov-rec {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            font-family: var(--term);
+            color: #c0143c;
+            font-size: 17px;
+            letter-spacing: 1px;
+            text-shadow: 0 0 6px rgba(192, 20, 60, .8);
+            transition: opacity .1s linear;
+        }
+
+        .pov-meter {
+            position: absolute;
+            bottom: 16px;
+            left: 16px;
+            width: 230px;
+            background: rgba(0, 0, 0, .65);
+            border: 1px solid #333;
+            padding: 6px 8px;
+        }
+
+        .pov-meter .row {
+            font-size: 15px;
+            color: var(--ceniza);
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .pov-meter .row b {
+            color: var(--ambar);
+        }
+
+        .pov-meter .bar {
+            height: 7px;
+            background: #000;
+            border: 1px solid #444;
+            margin-top: 3px;
+            position: relative;
+        }
+
+        .pov-meter .bar i {
+            display: block;
+            height: 100%;
+            background: linear-gradient(90deg, #fff, var(--ambar));
+        }
+
+        #povBtn {
+            position: absolute;
+            bottom: 16px;
+            right: 16px;
+        }
+
+        .pov-hint {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            color: #e6e6e6;
+            font-size: 18px;
+            letter-spacing: 2px;
+            text-shadow: 0 0 12px rgba(0, 0, 0, .9);
+            padding: 14px 22px;
+            background: rgba(0, 0, 0, .4);
+            border: 1px dashed var(--ceniza);
+        }
+
+        .pov-hint small {
+            color: var(--ambar);
+        }
+
+        .pov-hide {
+            animation: fadeout .6s forwards;
+        }
+
+        @keyframes fadeout {
+            to {
+                opacity: 0;
+                visibility: hidden;
+            }
+        }
+
+        /* ---------- modo dueño / sótano ---------- */
+        .modal-back {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .85);
+            display: none;
+            place-items: center;
+            z-index: 10001;
+        }
+
+        .modal-back.show {
+            display: grid;
+        }
+
+        .modal-box {
+            width: min(90vw, 340px);
+            background: #0a0a0a;
+            border: 2px double var(--morado-neon);
+            padding: 16px;
+            box-shadow: 0 0 30px rgba(179, 102, 255, .35);
+        }
+
+        .modal-box h3 {
+            font-family: var(--pixel);
+            font-size: 10px;
+            color: var(--morado-neon);
+            margin: 0 0 10px;
+            line-height: 1.7;
+        }
+
+        .vault {
+            display: none;
+            border: 2px solid var(--morado-neon);
+            background: rgba(10, 0, 20, .92);
+            box-shadow: 0 0 25px rgba(179, 102, 255, .25), inset 0 0 30px rgba(0, 0, 0, .8);
+            padding: 14px 16px;
+            margin: 26px 0;
+        }
+
+        .vault.show {
+            display: block;
+        }
+
+        .vault>h2 {
+            font-family: var(--pixel);
+            font-size: 12px;
+            color: var(--morado-neon);
+            margin: 0;
+            text-shadow: 0 0 8px rgba(179, 102, 255, .6);
+        }
+
+        .vault-hint {
+            font-size: 12px;
+            color: #a888b8;
+            margin: 8px 0 12px;
+        }
+
+        .tabs {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .tabs button {
+            background: transparent;
+            border: 1px solid var(--morado);
+            color: var(--ceniza);
+            margin: 0;
+        }
+
+        .tabs button.on {
+            border-color: var(--morado-neon);
+            color: var(--morado-neon);
+            box-shadow: 0 0 10px rgba(179, 102, 255, .35);
+        }
+
+        .panel {
+            display: none;
+        }
+
+        .panel.show {
+            display: block;
+        }
+
+        .panel h4 {
+            font-family: var(--term);
+            color: var(--morado-neon);
+            font-size: 17px;
+            margin: 8px 0;
+            letter-spacing: 1px;
+        }
+
+        .prv-post {
+            border: 1px dotted #4a3a5c;
+            background: rgba(30, 0, 40, .35);
+            padding: 8px 10px;
+            margin-bottom: 8px;
+        }
+
+        .prv-post .ph {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            gap: 8px;
+        }
+
+        .prv-post .pt {
+            font-family: var(--term);
+            color: #fff;
+            font-size: 19px;
+        }
+
+        .prv-post .pd {
+            font-size: 11px;
+            color: #8a6e9e;
+            white-space: nowrap;
+        }
+
+        .prv-post .pb {
+            color: #cbb;
+            margin-top: 4px;
+            font-size: 13px;
+        }
+
+        .del {
+            background: transparent;
+            border: 1px solid #5a2020;
+            color: #c04848;
+            font-family: var(--term);
+            font-size: 13px;
+            padding: 0 6px;
+            margin: 0 0 0 8px;
+        }
+
+        .del:hover {
+            background: transparent;
+            border-color: var(--sangre-claro);
+            color: var(--sangre-claro);
+            box-shadow: none;
+        }
+
+        .media-item {
+            border: 1px dotted #4a3a5c;
+            background: rgba(30, 0, 40, .35);
+            padding: 10px;
+            margin-bottom: 10px;
+        }
+
+        .media-item .ml {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            font-family: var(--term);
+            color: var(--morado-neon);
+            font-size: 17px;
+            margin-bottom: 6px;
+        }
+
+        .media-item img,
+        .media-item video {
+            max-width: 100%;
+            border: 1px solid var(--morado-neon);
+            display: block;
+            background: #000;
+        }
+
+        .media-item audio {
+            width: 100%;
+            display: block;
+        }
+
+        .media-item iframe {
+            width: 100%;
+            height: 260px;
+            border: 1px solid var(--morado-neon);
+            background: #000;
+            display: block;
+        }
+
+        .media-item .ms {
+            font-size: 11px;
+            color: #7e6a8e;
+            margin-top: 5px;
+            word-break: break-all;
+        }
+
+        .vault-lock {
+            margin-top: 12px;
+            border-top: 1px dashed #3a2a4c;
+            padding-top: 10px;
+            text-align: right;
+        }
+
+        .vault-lock button {
+            background: transparent;
+            border: 1px solid #5a2020;
+            color: #a04848;
+        }
+
+        .vault-lock button:hover {
+            background: transparent;
+            border-color: var(--sangre-claro);
+            color: var(--sangre-claro);
+            box-shadow: none;
+        }
+
+        /* ---- adjuntos del diario ---- */
+        .file-drop {
+            display: block;
+            border: 1px dashed var(--morado-neon);
+            background: rgba(30, 0, 40, .35);
+            color: var(--ceniza);
+            text-align: center;
+            padding: 12px 10px;
+            margin: 8px 0;
+            cursor: pointer;
+            font-family: var(--term);
+            font-size: 15px;
+            transition: background .2s, border-color .2s;
+        }
+
+        .file-drop:hover,
+        .file-drop.drag {
+            background: rgba(60, 0, 80, .5);
+            border-color: var(--sangre-claro);
+        }
+
+        .file-drop small {
+            display: block;
+            color: #6f5c7e;
+            font-size: 11.5px;
+            margin-top: 3px;
+        }
+
+        .adj-prev {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .adj-prev .chip {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: 1px solid var(--morado);
+            background: rgba(0, 0, 0, .5);
+            padding: 3px 6px;
+            font-size: 12px;
+            color: var(--ceniza);
+            max-width: 100%;
+        }
+
+        .adj-prev .chip img {
+            width: 34px;
+            height: 34px;
+            object-fit: cover;
+            border: 1px solid #333;
+        }
+
+        .adj-prev .chip b {
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            max-width: 130px;
+            font-weight: normal;
+        }
+
+        .adj-prev .chip button {
+            background: none;
+            border: none;
+            color: var(--sangre-claro);
+            cursor: pointer;
+            padding: 0 2px;
+            min-height: 0;
+        }
+
+        .adj-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+            gap: 6px;
+            margin-top: 8px;
+        }
+
+        .adj-grid img,
+        .adj-grid video {
+            width: 100%;
+            max-height: 190px;
+            object-fit: cover;
+            border: 1px solid var(--morado);
+            background: #000;
+            display: block;
+            cursor: zoom-in;
+        }
+
+        .adj-grid audio {
+            width: 100%;
+            grid-column: 1 / -1;
+        }
+
+        /* visor a pantalla completa al tocar un adjunto */
+        .visor {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, .93);
+            display: none;
+            place-items: center;
+            z-index: 9990;
+            padding: 20px;
+        }
+
+        .visor.show {
+            display: grid;
+        }
+
+        .visor img,
+        .visor video {
+            max-width: 100%;
+            max-height: 88vh;
+            border: 1px solid var(--morado-neon);
+        }
+
+        .visor .cerrar {
+            position: absolute;
+            top: 14px;
+            right: 16px;
+        }
+
+        .empty-hint {
+            font-size: 12.5px;
+            color: #6f5c7e;
+            font-style: italic;
+        }
+
+        /* ============ RESPONSIVE ============ */
+
+        /* nada debe desbordar a lo ancho: en móvil el scroll horizontal
+           arruina cualquier diseño */
+        img,
+        iframe,
+        video,
+        canvas {
+            max-width: 100%;
+        }
+
+        .media-item .ms {
+            overflow-wrap: anywhere;
+        }
+
+        /* --- tablet / pantallas medianas --- */
+        @media (max-width:900px) {
+            .marco {
+                margin: 14px 10px;
+            }
+        }
+
+        /* --- móvil: la barra pasa arriba, todo a una columna --- */
+        @media (max-width:700px) {
+            body {
+                font-size: 15px;
+            }
+
+            .marco {
+                margin: 0;
+                border-width: 2px;
+                border-left: none;
+                border-right: none;
+            }
+
+            .contenido {
+                flex-direction: column;
+            }
+
+            .sidebar {
+                width: 100%;
+                border-right: none;
+                border-bottom: 2px dashed var(--sangre);
+                padding: 14px 12px;
+            }
+
+            .main {
+                min-width: 0;
+                padding: 14px 12px;
+            }
+
+            /* la barra en móvil: cajas en rejilla para no hacer una torre
+               larguísima antes de llegar a las notas */
+            .sidebar {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+                align-items: start;
+            }
+
+            .sidebar .caja {
+                margin: 0;
+            }
+
+            /* estas dos merecen el ancho completo */
+            .sidebar .caja:first-child,
+            .sidebar .paquete-cigs {
+                grid-column: 1 / -1;
+            }
+
+            header {
+                padding: 14px 10px;
+            }
+
+            .sub {
+                font-size: 12px;
+            }
+
+            /* controles cómodos para el dedo */
+            button,
+            .btn-fumar,
+            input,
+            textarea {
+                min-height: 42px;
+            }
+
+            /* 16px evita que iOS haga zoom al enfocar un campo */
+            input,
+            textarea {
+                font-size: 16px;
+            }
+
+            .media-item iframe {
+                height: 200px;
+            }
+
+            .vault {
+                padding: 12px 10px;
+                margin: 18px 0;
+            }
+
+            .tabs {
+                display: flex;
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .tabs button {
+                flex: 1 1 auto;
+            }
+        }
+
+        /* --- una sola columna en pantallas muy angostas --- */
+        @media (max-width:430px) {
+            .sidebar {
+                grid-template-columns: 1fr;
+            }
+
+            .perfil-img {
+                width: 88px;
+                height: 88px;
+            }
+
+            .perfil-img::after {
+                font-size: 34px;
+            }
+
+            .blinkie {
+                font-size: 10px;
+            }
+        }
+
+        /* ============ HUD del POV en pantallas chicas ============
+           el medidor de 230px fijo se comía media pantalla en el celular */
+        @media (max-width:700px) {
+            .pov-meter {
+                width: auto;
+                left: 10px;
+                right: 10px;
+                bottom: 10px;
+                font-size: 13px;
+            }
+
+            .pov-meter .row {
+                font-size: 13px;
+            }
+
+            #povBtn {
+                bottom: auto;
+                top: 10px;
+                right: 10px;
+                padding: 8px 14px;
+            }
+
+            .pov-rec {
+                top: 12px;
+                right: 92px;
+                font-size: 14px;
+            }
+
+            .pov-tag {
+                top: 12px;
+                left: 10px;
+                font-size: 13px;
+            }
+
+            .pov-hint {
+                font-size: 14px;
+                letter-spacing: 1px;
+                width: min(86vw, 340px);
+                padding: 10px 14px;
+                top: 42%;
+            }
+        }
+
+        /* pantallas bajas (celular acostado): el HUD se comía media vista */
+        @media (max-height:520px) {
+            .pov-hint {
+                font-size: 13px;
+                padding: 8px 12px;
+                letter-spacing: 1px;
+                width: min(80vw, 330px);
+            }
+
+            .pov-meter {
+                width: 172px;
+                padding: 4px 7px;
+                bottom: 8px;
+                left: 8px;
+                line-height: 1.25;
+            }
+
+            .pov-meter .row {
+                font-size: 11.5px;
+            }
+
+            .pov-meter .bar {
+                height: 5px;
+                margin-top: 2px;
+            }
+
+            .pov-tag {
+                top: 8px;
+                left: 8px;
+                font-size: 12px;
+                padding: 2px 7px;
+            }
+
+            #povBtn {
+                top: 8px;
+                right: 8px;
+                bottom: auto;
+                padding: 5px 11px;
+                font-size: 11px;
+            }
+
+            .pov-rec {
+                top: 10px;
+                right: 84px;
+                font-size: 13px;
+            }
+        }
+
+        /* ============ RESPONSIVE v2: pulido fino ============ */
+
+        /* texto pegado por gente (firmas, notas, quotes) puede traer palabras
+           kilométricas: que rompan línea antes de romper el layout */
+        .post,
+        .prv-post,
+        .gb-entry,
+        .quote-rot {
+            overflow-wrap: anywhere;
+        }
+
+        @media (max-width:900px) {
+            .sidebar {
+                width: 220px;
+            }
+        }
+
+        @media (max-width:700px) {
+
+            /* el título glitch con letter-spacing 2px se salía en 360px */
+            .glitch {
+                letter-spacing: 1px;
+                font-size: clamp(15px, 5.5vw, 26px);
+            }
+
+            .sub {
+                letter-spacing: 1px;
+                font-size: 14px;
+            }
+
+            marquee {
+                font-size: 15px;
+            }
+
+            .post {
+                padding: 10px;
+            }
+
+            .post h2 {
+                font-size: 12px;
+            }
+
+            /* botones de los formularios del sótano a lo ancho: más fáciles
+               de acertar con el pulgar */
+            #ppForm button[type=submit],
+            #pmForm button[type=submit] {
+                width: 100%;
+            }
+
+            /* el engranaje flotante chocaba con el © del pie */
+            .gear-box {
+                position: static;
+                margin-top: 8px;
+                text-align: center;
+            }
+
+            .toast {
+                bottom: calc(14px + env(safe-area-inset-bottom, 0px));
+                font-size: 15px;
+            }
+
+            /* HUD del POV respetando notch e islas dinámicas */
+            .pov-meter {
+                bottom: calc(10px + env(safe-area-inset-bottom, 0px));
+                left: calc(10px + env(safe-area-inset-left, 0px));
+                right: calc(10px + env(safe-area-inset-right, 0px));
+            }
+
+            #povBtn {
+                top: calc(10px + env(safe-area-inset-top, 0px));
+                right: calc(10px + env(safe-area-inset-right, 0px));
+            }
+
+            .pov-tag {
+                top: calc(12px + env(safe-area-inset-top, 0px));
+                left: calc(10px + env(safe-area-inset-left, 0px));
+            }
+
+            .pov-rec {
+                top: calc(14px + env(safe-area-inset-top, 0px));
+            }
+        }
+
+        /* teléfonos mini (320-360px) */
+        @media (max-width:360px) {
+            body {
+                font-size: 14px;
+            }
+
+            .glitch {
+                font-size: 14px;
+            }
+
+            .tag {
+                font-size: 12px;
+                padding: 0 5px;
+            }
+
+            .contador {
+                font-size: 8px;
+            }
+
+            .caja h3 {
+                font-size: 10px;
+            }
+
+            .main,
+            .sidebar {
+                padding: 12px 10px;
+            }
+        }
+
+        /* táctil: los :hover que desplazan cosas quedan raros con el dedo */
+        @media (hover:none) {
+            nav a:hover {
+                transform: none;
+            }
+
+            .post:hover {
+                box-shadow: none;
+            }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+
+            *,
+            *::before,
+            *::after {
+                animation: none !important;
+                transition: none !important;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="scanlines"></div>
+    <div class="vignette"></div>
+    <canvas id="humo"></canvas>
+    <div class="toast" id="toast"></div>
+
+    <!-- POV: pantalla de primera persona -->
+    <div id="povWrap">
+        <canvas id="pov"></canvas>
+        <div class="pov-hud">
+            <div class="pov-tag" id="povTag">🚬 POV</div>
+            <div class="pov-rec" id="povRec">● REC</div>
+            <div class="pov-meter">
+                <div class="row"><span>papel</span><b id="povPaper">100%</b></div>
+                <div class="bar"><i id="povBurnBar"></i></div>
+                <div class="row" style="margin-top:4px"><span>ceniza</span><b id="povAsh">0%</b></div>
+                <div class="row" style="margin-top:4px"><span>nicotina</span><b id="povNico">0%</b></div>
+                <div class="row" style="margin-top:4px"><span>caladas</span><b id="povDrags">0</b></div>
+                <div class="row" style="margin-top:4px"><span>aire</span><b id="povAir">—</b></div>
+                <div class="bar"><i id="povAirBar" style="width:0%"></i></div>
+            </div>
+            <button id="povBtn">APAGAR</button>
+            <div class="pov-hint" id="povHint">mantené apretado (o [F]) para dar una calada<br><small>soltá para exhalar
+                    · Esc para apagar antes</small></div>
+        </div>
+    </div>
+
+    <div class="modal-back" id="pinModal">
+        <form class="modal-box" id="pinForm">
+            <h3>◈ modo dueño ◈</h3>
+            <input type="password" id="pinInput" placeholder="llave del sótano..." autocomplete="off">
+            <button type="submit">ABRIR SÓTANO</button>
+            <button type="button" id="pinCancel">CANCELAR</button>
+        </form>
+    </div>
+
+    <div class="marco">
+        <header>
+            <h1 class="glitch" data-text="✖ JOSU ✖">✖ JOSU ✖</h1>
+            <div class="sub">josu · 21 · insomnio, cafetera y Cry of Fear de madrugada</div>
+        </header>
+
+        <marquee scrollamount="4">21. insomne desde los diecisiete. Cry of Fear y café pasado. este es un blog de
+            los de antes: sin algoritmo, sin apuro, con el humo llegando solo. los mensajes quedan del lado de tu
+            navegador, y está bien que sea así.</marquee>
+
+        <div class="contenido">
+
+            <aside class="sidebar">
+                <div class="caja">
+                    <h3>sobre mi</h3>
+                    <div class="perfil-img"></div>
+                    <div class="stats">
+                        <div>nombre: <b>josu</b></div>
+                        <div>edad: <b>21</b></div>
+                        <div>estado: <b id="mood">despierto</b></div>
+                        <div>ubicacion: <b>el balcón, otra vez</b></div>
+                        <div>zodiaco: <b>Leo</b> </div>
+                        <div>bebida: <b>cafetera + monster</b></div>
+                    </div>
+                    <p class="small cursivo">"la constancia de la madrugada es lo único que no me falló nunca."</p>
+                </div>
+
+                <div class="caja" id="nowPlayingBox" style="display:none;">
+                    <h3>🎧 ahora sonando</h3>
+                    <div id="nowPlayingBody"></div>
+                </div>
+
+                <div class="caja paquete-cigs">
+                    <h3>el paquete</h3>
+                    <div class="pack-count" id="packInfo">quedan 20/20</div>
+                    <button class="btn-fumar" id="btnPOV">Coger uno → sentarme a fumar</button>
+                    <button class="btn-fumar" id="btnComprar" style="display:none">IR A COMPRAR OTRO</button>
+                    <div class="meter-label"><span>nicotina</span><span id="nicoPct">0%</span></div>
+                    <div class="meter"><i id="nicoBar"></i></div>
+                    <p class="small" id="cigMsg">se fuma en primera persona. [F] cuando quieras.</p>
+                </div>
+
+                <div class="caja">
+                    <h3>navigation</h3>
+                    <nav>
+                        <a href="#home">:: inicio</a>
+                        <a href="#posts">:: mis notas</a>
+                        <a href="#latas">:: latas</a>
+                        <a href="#cof">:: cry of fear</a>
+                        <a href="#guest">:: firmas</a>
+                        <a href="#links">:: gente</a>
+                    </nav>
+                </div>
+
+                <div class="caja">
+                    <h3>de paso</h3>
+                    <div class="blinkies">
+                        <span class="blinkie">☕ NIGHT OWL</span>
+                        <span class="blinkie">🚬 NICOTINA CONTROLADA (miento)</span>
+                        <span class="blinkie">💚 GASOLINA EN LATA</span>
+                        <span class="blinkie">🎧 MÚSICA ABAJO DEL HUMO</span>
+                        <span class="blinkie">📼 SE SIGUE GRABANDO</span>
+                        <span class="blinkie">🔦 SIMON-WAS-HERE, OBVIAMENTE</span>
+                    </div>
+                </div>
+
+                <div class="caja webring">
+                    <h3>webring</h3>
+                    <p class="small">parte del<br><b>EMO-ALT-WEBRING</b><br>← <a href="#">prev</a> | <a
+                            href="#">rand</a> | <a href="#">next</a> →</p>
+                </div>
+            </aside>
+
+            <main class="main" id="home">
+                <div class="caja" style="text-align:center; margin-bottom:18px;">
+                    <p class="cursivo" style="font-size:16px; color:#fff;">
+                        un blog hecho a mano, de esos que ya nadie hace.<br>
+                        se ve mejor con la luz apagada y el monitor como única lámpara.<br>
+                        si estás acá, probablemente entiendas lo de las 3 a.m. y el ruido que no te deja quieto.<br>
+                        hay un paquete en la barra: <span class="nico">coge uno</span> y fumátelo
+                        <span class="monster">en primera persona</span> con [F].
+                    </p>
+                </div>
+
+                <h2 style="font-family:'Press Start 2P'; font-size:13px; color:var(--sangre-claro);" id="posts">~ mis
+                    notas ~</h2>
+
+                <div id="postsPub"></div>
+
+                <article class="post">
+                    <div class="fecha">📅 21/08/2026 — 03:47 am</div>
+                    <h2>03:47, el insomnio no perdona</h2>
+                    <span class="tag">#insomnio</span><span class="tag">#cigarrillos</span><span
+                        class="tag">#madrugada</span>
+                    <p>llevo años aprendiendo a quedarme dormido y no mejoro. anoche me senté en la ventana con un café
+                        frío y dejé que la calle hiciera el ruido por mí. hay algo cansado pero ordenado en la
+                        madrugada:
+                        nadie espera nada de vos y eso, de vez en cuando, es un alivio. prendí un cigarrillo a las tres
+                        y
+                        lo apagué a las tres y veinte. dos horas después seguía ahí.</p>
+                    <blockquote>"no es que no duerma: es que la noche me recibe mejor."</blockquote>
+                    <p class="small">hace un rato me pregunté si el humo cuenta como alguien hablando. no lo sé.</p>
+                </article>
+
+                <div class="divider">✶ ✶ ✶</div>
+
+                <article class="post">
+                    <div class="fecha">📅 09/08/2026 — 23:12 pm</div>
+                    <h2>el intento número que perdí de contar</h2>
+                    <span class="tag">#nicotina</span><span class="tag">#rutinas</span>
+                    <p>volví a intentar dejar de fumar, porque hay que volver a intentarlo. aguanté de las nueve a las
+                        once y media. a las once y treinta y uno estaba comprando un atado, sin dramatismo, como se
+                        vuelve
+                        a casa después de una discusión tonta. no voy a contarlo como fracaso ni como victoria. la
+                        adicción es paciente, y yo me cansé antes que ella.</p>
+                    <p class="small">el motivo de este intento: un comentario de mi hermana. el motivo de la recaída:
+                        todo lo demás.</p>
+                </article>
+
+                <div class="divider">✶ ✶ ✶</div>
+
+                <article class="post" id="latas">
+                    <div class="fecha">📅 28/07/2026 — 04:20 am</div>
+                    <h2>el estante ya no aguanta más latas</h2>
+                    <span class="tag">#monster</span><span class="tag">#collection</span>
+                    <p>dije que era una colección y ahora la colección me está reclamando espacio:</p>
+                    <p>
+                        🥫 Original Green x6<br>
+                        🥫 Ultra White x3<br>
+                        🥫 Assault x2<br>
+                        🥫 Import x2<br>
+                        🥫 (buscando) Mango Loco x1
+                    </p>
+                    <p>las ordené por color y eso me hizo más feliz de lo que debería. la mango loco sigue escapándose,
+                        como todas las cosas que busco.</p>
+                    <p class="small">próxima parada: refrigerar lo que quede y ver cuánto tarda en volver a vaciarse.
+                    </p>
+                </article>
+
+                <div class="divider">✶ ✶ ✶</div>
+
+                <article class="post" id="cof">
+                    <div class="fecha">📅 02/07/2026 — 02:00 am</div>
+                    <h2>cry of fear y las cosas que no dijimos</h2>
+                    <span class="tag">#cryoffear</span><span class="tag">#simon</span>
+                    <p>lo jugué de pibe con el volumen al mínimo y ahora lo juego de noche, que es peor. simon arrastra
+                        una cámara y un pasado; yo arrastro un café y las mismas tres horas de sueño. el juego no asusta
+                        por los monstruos: asusta porque los teléfonos suenan y no hay nadie del otro lado. eso también
+                        me
+                        pasó de verdad. lo terminé hace una semana y todavía lo pienso.</p>
+                    <blockquote>"no es que no seas real. es que nadie se animó a confirmártelo."</blockquote>
+                    <p class="small">recomendación seria: jugarlo de día, en compañía, con las luces prendidas.</p>
+                </article>
+
+                <h2 style="font-family:'Press Start 2P'; font-size:13px; color:var(--sangre-claro);" id="guest">~
+                    firmas ~</h2>
+                <div class="caja">
+                    <div id="gb">
+                        <form id="gbform">
+                            <input type="text" id="gbname" placeholder="tu nombre..." maxlength="24" required>
+                            <textarea id="gbmsg" rows="2" placeholder="deja lo que quieras..." maxlength="240"
+                                required></textarea>
+                            <button type="submit">FIRMAR 🖤</button>
+                        </form>
+                        <p class="small">los mensajes son públicos: los ve cualquiera que visite el blog.</p>
+                        <div id="gblist"></div>
+                    </div>
+                </div>
+
+                <h2 style="font-family:'Press Start 2P'; font-size:13px; color:var(--sangre-claro);" id="links">~ gente
+                    ~</h2>
+                <div class="caja">
+                    <nav>
+                        <a href="https://josuuu.neocities.org/" target="_blank" rel="noopener">✦ neocities (mi
+                            hogar)</a>
+                        <a href="https://www.cry-of-fear.com" target="_blank" rel="noopener">✦ cry of fear official</a>
+                        <a href="https://steamcommunity.com/id/josu2005/" target="_blank" rel="noopener">✦ Steam</a>
+                        <a href="#">✦ xX_bloodtears_Xx (top friend)</a>
+                        <a href="#">✦ sad.mp3 (blog hermano)</a>
+                    </nav>
+                </div>
+            </main>
+        </div>
+
+        <footer>
+            <div class="blinkies">
+                <span class="blinkie">💾 HECHA A MANO</span>
+                <span class="blinkie">📺 VOLUMEN BAJO</span>
+                <span class="blinkie">🕯 SE ACTUALIZA SOLA (a veces)</span>
+            </div>
+            <p class="quote-rot" id="quoteRot"></p>
+            <p>hora local: <span class="contador" id="clock">--:--:--</span> · visitas: <span class="contador"
+                    id="counter">000000</span></p>
+            <p>© 2026 josu — escritura y cigarrillos · hecho a mano, sin frameworks · <a href="#home">subir</a></p>
+            <p class="small">este sitio no recopila nada de vos: todo vive en tu navegador · 88x31 welcome · mejores
+                resultados con el volumen bajo y la luz apagada</p>
+            <div class="gear-box">
+                <button id="btnVault" title="modo dueño">⚙</button>
+            </div>
+        </footer>
+    </div>
+
+    <div class="visor" id="visor">
+        <button class="cerrar" id="visorCerrar">CERRAR ✕</button>
+        <div id="visorBody"></div>
+    </div>
+
+    <!-- SÓTANO: solo visible con la llave -->
+    <div class="vault" id="vault">
+        <h2>◈ sótano — solo mío ◈</h2>
+        <p class="vault-hint">esto vive en este navegador y en ninguno otro. si abrís el sitio desde otra máquina, el
+            sótano está vacío — que es exactamente la idea. los visitantes nunca ven esta sección: ni los textos, ni el
+            baúl.</p>
+        <div class="tabs">
+            <button id="tabDiario" class="on">diario personal</button>
+            <button id="tabBaul">baúl de media</button>
+            <button id="tabPub">publicar nota</button>
+            <button id="tabNow">estado</button>
+        </div>
+
+        <div class="panel show" id="diarioPane">
+            <h4>escribir una nota</h4>
+            <form id="ppForm">
+                <input type="text" id="ppTitle" placeholder="título..." maxlength="80" required>
+                <textarea id="ppBody" rows="4" placeholder="esto no lo lee nadie más que yo..." maxlength="2000"
+                    required></textarea>
+                <input type="text" id="ppTag" placeholder="(opcional) etiqueta..." maxlength="30">
+                <label class="file-drop" id="ppDrop">
+                    <input type="file" id="ppFiles" accept="image/*,video/*,audio/*" multiple hidden>
+                    <span>📎 adjuntar fotos, gifs, videos o audio</span>
+                    <small>quedan en este navegador · arrastrá y soltá acá</small>
+                </label>
+                <div id="ppPrev" class="adj-prev"></div>
+                <button type="submit">GUARDAR EN EL SÓTANO</button>
+            </form>
+            <p class="empty-hint" id="ppQuota"></p>
+            <h4>notas guardadas</h4>
+            <div id="privPosts"></div>
+        </div>
+
+        <div class="panel" id="baulPane">
+            <h4>agregar al baúl</h4>
+            <form id="pmForm">
+                <input type="url" id="pmUrl" placeholder="URL del video / gif / mp3..." required>
+                <input type="text" id="pmLabel" placeholder="(opcional) etiqueta..." maxlength="60">
+                <button type="submit">GUARDAR EN EL BAÚL</button>
+            </form>
+            <p class="empty-hint">acepta: youtube, gifs, imágenes, mp4/webm y mp3. se detecta solo según la URL.</p>
+            <h4>lo que hay dentro</h4>
+            <div id="privMedia"></div>
+        </div>
+
+        <div class="panel" id="pubPane">
+            <h4>publicar nota nueva</h4>
+            <form id="pubForm">
+                <input type="text" id="pubTitle" placeholder="título..." maxlength="80" required>
+                <textarea id="pubBody" rows="4" placeholder="esto sí lo ve todo el mundo..." maxlength="2000" required></textarea>
+                <input type="text" id="pubTag" placeholder="(opcional) etiquetas separadas por espacio, ej: #insomnio #humo" maxlength="80">
+                <input type="url" id="pubYoutubeUrl" placeholder="(opcional) link de YouTube...">
+                <label class="file-drop" id="pubDrop">
+                    <input type="file" id="pubFiles" accept="image/*,video/*,audio/*" multiple hidden>
+                    <span>📎 adjuntar fotos, gifs, videos o audio</span>
+                    <small>se suben al blog · nada de links externos · arrastrá y soltá acá</small>
+                </label>
+                <div id="pubPrev" class="adj-prev"></div>
+                <button type="submit">PUBLICAR EN EL BLOG</button>
+            </form>
+            <p class="empty-hint">esto aparece arriba, en "~ mis notas ~", para cualquiera que abra el sitio. los
+                archivos se suben directo al blog y se muestran adentro de la nota; la única excepción es youtube,
+                que va como link porque así se embebe el video.</p>
+            <h4>notas publicadas</h4>
+            <div id="pubPostsAdmin"></div>
+        </div>
+
+        <div class="panel" id="nowPane">
+            <h4>qué estás escuchando</h4>
+            <form id="nowForm">
+                <input type="text" id="nowLabel" placeholder="canción / artista..." maxlength="80" required>
+                <input type="url" id="nowUrl" placeholder="(opcional) link de youtube...">
+                <button type="submit">ACTUALIZAR ESTADO</button>
+            </form>
+            <button id="nowClear" type="button" class="btn-fumar" style="margin-top:10px;">APAGAR ESTADO</button>
+            <p class="empty-hint">esto se muestra en la barra lateral como "🎧 ahora sonando", visible para todos.</p>
+        </div>
+
+        <div class="vault-lock">
+            <button id="btnLock">cerrar sótano 🔒</button>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script>
+        /* ---------- conexión a Supabase ---------- */
+        const SUPABASE_URL = 'https://egiicmjnshaatnssbxxg.supabase.co';
+        const SUPABASE_ANON_KEY = 'sb_publishable_anMDHhInYqWLwbB3gYGOCw_Croa6VSP';
+        const OWNER_EMAIL = 'josu@gmail.com';
+        const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+        /* ---------- config del dueño ---------- */
+        const K = {
+            posts: 'bsj_v2_priv_posts',
+            media: 'bsj_v2_priv_media',
+            cigs: 'bsj_v2_cigs',
+            nico: 'bsj_v2_nico'
+        };
+        /* Modelo de consumo: un cigarrillo NO se consume solo por reloj. Se
+           consume sobre todo cuando das caladas — que es lo que pasa de verdad.
+           El brasa arde lento sola (smolder) y se acelera mucho al inhalar. */
+        const BURN_SMOLDER = 100 / 260;  // %/s ardiendo solo, sin tocarlo
+        const BURN_CALADA = 4.4;        // %/s extra mientras inhalás
+        const INHALE_MAX = 2.6;         // segundos: más que esto no entra aire
+
+        const $ = id => document.getElementById(id);
+        const reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        function store(key, val) {
+            try {
+                if (val === undefined) return JSON.parse(localStorage.getItem(key));
+                localStorage.setItem(key, JSON.stringify(val));
+            } catch (e) { return null; }
+        }
+
+        function esc(s) {
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            })[c]);
+        }
+
+        function toast(msg) {
+            const t = $('toast');
+            t.textContent = msg;
+            t.classList.add('show');
+            clearTimeout(t._tm);
+            t._tm = setTimeout(() => t.classList.remove('show'), 2600);
+        }
+
+        /* ---------- auditivo (ruido para la calada) ---------- */
+        let AC = null, master = null;
+        function audio() {
+            try {
+                if (!AC) {
+                    AC = new (window.AudioContext || window.webkitAudioContext)();
+                    master = AC.createGain();
+                    master.gain.value = .4;
+                    master.connect(AC.destination);
+                }
+                if (AC.state === 'suspended') AC.resume();
+                return AC;
+            } catch (e) { return null; }
+        }
+        function noiseBurst(dur, f0, f1, type, vol) {
+            try {
+                const c = audio();
+                if (!c) return;
+                const n = Math.floor(c.sampleRate * dur);
+                const buf = c.createBuffer(1, n, c.sampleRate);
+                const ch = buf.getChannelData(0);
+                for (let i = 0; i < n; i++) ch[i] = (Math.random() * 2 - 1) * (1 - i / n);
+                const src = c.createBufferSource();
+                src.buffer = buf;
+                const flt = c.createBiquadFilter();
+                flt.type = type;
+                flt.Q.value = .7;
+                flt.frequency.setValueAtTime(f0, c.currentTime);
+                if (f1) flt.frequency.exponentialRampToValueAtTime(f1, c.currentTime + dur);
+                const g = c.createGain();
+                g.gain.setValueAtTime(vol, c.currentTime);
+                g.gain.exponentialRampToValueAtTime(.0001, c.currentTime + dur);
+                src.connect(flt).connect(g).connect(master);
+                src.start();
+            } catch (e) { }
+        }
+
+        /* ---------- ambient canvas (humo de fondo / estela del mouse) ---------- */
+        const humo = $('humo');
+        const hx = humo.getContext('2d');
+        let W, H;
+
+        /* buffer de render del POV. HL1 corría a 640x480: píxeles visibles, pero
+           NO bloques gigantes. Renderizamos cerca de esa densidad y escalamos sin
+           suavizar — el look viene de la textura y el dither, no de pixelar fuerte. */
+        const povLow = document.createElement('canvas');
+        const lx = povLow.getContext('2d', { willReadFrequently: true });
+        let PW = 480, PH = 270;
+
+        function resize() {
+            W = humo.width = innerWidth;
+            H = humo.height = innerHeight;
+            const pc = $('pov');
+            if (pc) {
+                pc.width = innerWidth; pc.height = innerHeight;
+                /* el POV se renderiza SIEMPRE en 16:9 y se muestra con barras
+                   negras. Así la escena se ve igual en cualquier pantalla y en
+                   vertical no se estira ni se aplasta la mano. */
+                const aspecto = Math.max(1.0, Math.min(1.9, innerWidth / innerHeight));
+                /* en el celular el buffer baja de resolución: píxeles más
+                   gordos (más GoldSrc todavía) y el dither por software corre
+                   fluido incluso en gama baja */
+                const movil = innerWidth < 700 || matchMedia('(pointer:coarse)').matches;
+                PW = povLow.width = movil
+                    ? 340
+                    : Math.max(420, Math.min(620, Math.round(innerWidth * .4)));
+                PH = povLow.height = Math.round(PW / aspecto);
+            }
+        }
+        resize();
+        addEventListener('resize', resize);
+
+        const trail = [];
+        function puff(x, y, n, strong) {
+            for (let i = 0; i < n; i++) {
+                trail.push({
+                    x: x + (Math.random() - .5) * 8,
+                    y: y + (Math.random() - .5) * 4,
+                    vx: (Math.random() - .5) * .4,
+                    vy: -(.5 + Math.random() * (strong ? 1.4 : .8)),
+                    r: 2 + Math.random() * 4,
+                    a: .16 + Math.random() * .18,
+                    life: 0,
+                    max: 150 + Math.random() * 160,
+                    ph: Math.random() * Math.PI * 2
+                });
+            }
+        }
+
+        let lastTrail = 0;
+        addEventListener('mousemove', e => {
+            const now = performance.now();
+            if (!reduced && !pov.on && now - lastTrail > 70 && Math.random() > .5) {
+                lastTrail = now;
+                puff(e.clientX, e.clientY, 1, false);
+            }
+        });
+
+        function ambientLoop() {
+            hx.clearRect(0, 0, W, H);
+            for (let i = trail.length - 1; i >= 0; i--) {
+                const p = trail[i];
+                p.life++;
+                p.x += p.vx + Math.sin(p.y * .015 + p.ph) * .35;
+                p.y += p.vy;
+                p.r *= 1.012;
+                const alpha = p.a * Math.max(0, 1 - p.life / p.max);
+                if (alpha <= 0 || p.y < -20) { trail.splice(i, 1); continue; }
+                const g = hx.createRadialGradient(p.x, p.y, 0, p.x, p.y, p.r * 2);
+                g.addColorStop(0, 'rgba(190,190,190,' + alpha + ')');
+                g.addColorStop(1, 'rgba(190,190,190,0)');
+                hx.fillStyle = g;
+                hx.beginPath();
+                hx.arc(p.x, p.y, p.r * 2, 0, Math.PI * 2);
+                hx.fill();
+            }
+            requestAnimationFrame(ambientLoop);
+        }
+
+        /* ---------- estado del paquete / nicotina ---------- */
+        let cigs = store(K.cigs);
+        if (cigs === null || isNaN(cigs)) cigs = 20;
+        let nico = store(K.nico);
+        if (nico === null || isNaN(nico)) nico = 0;
+
+        function renderPack() {
+            $('packInfo').textContent = cigs > 0 ? ('quedan ' + cigs + '/20') : 'PAQUETE VACÍO';
+            $('btnPOV').disabled = cigs <= 0;
+            $('btnPOV').textContent = pov.on ? 'POV ACTIVO' : (cigs > 0 ? 'Coger uno → sentarme a fumar' : 'PAQUETE VACÍO');
+            $('btnComprar').style.display = cigs <= 0 ? 'inline-block' : 'none';
+            $('nicoBar').style.width = nico + '%';
+            $('nicoPct').textContent = Math.round(nico) + '%';
+            $('cigMsg').textContent = cigs <= 0
+                ? 'afuera no hay nada. toca comprar otro.'
+                : (matchMedia('(pointer:coarse)').matches
+                    ? 'se fuma en primera persona. mantené el dedo para la calada.'
+                    : 'se fuma en primera persona. mantené [F] para la calada.');
+        }
+
+        $('btnComprar').addEventListener('click', () => {
+            cigs = 20;
+            store(K.cigs, cigs);
+            toast('atención: comprar otra vez sí es más fácil. 20/20.');
+            renderPack();
+        });
+
+        /* ---------- POV: primera persona, cámara en tus ojos ---------- */
+        const povWrap = $('povWrap');
+        const pc = $('pov');
+        const px = pc.getContext('2d');
+
+        const pov = {
+            on: false,
+            phase: 'idle', // 'ignite' | 'lit' | 'out'
+            burn: 100,
+            haze: 0,
+            flash: 0,
+            phaseT: 0,
+            last: 0,
+            t: 0,
+            mouse: { x: 0, y: 0 },
+            parts: [],
+            ash: [],
+            ember: { x: 0, y: 0 },
+            hintSeen: false,
+            // ciclo de la calada: inhalar -> retener -> exhalar
+            inhalando: false,
+            inhale: 0,      // cuánto llevás inhalando, en segundos
+            exhale: 0,      // 1 -> 0 mientras soltás el humo
+            exhaleFuerza: 0,
+            caladas: 0,
+            ashCol: 0,      // ceniza acumulada sin sacudir
+            ribbon: [],     // hilo fino de humo que sube solo de la brasa
+            lampOff: 0      // frames que la lámpara de sodio se corta
+        };
+
+        function startPOV() {
+            if (cigs <= 0) {
+                toast('no hay nada que coger. el paquete está vacío.');
+                return;
+            }
+            cigs--;
+            store(K.cigs, cigs);
+            audio();
+            pov.on = true;
+            pov.phase = 'ignite';
+            pov.phaseT = 0;
+            pov.burn = 100;
+            pov.haze = 0;
+            pov.flash = 0;
+            pov.parts = [];
+            pov.ash = [];
+            pov.ribbon = [];
+            pov.lampOff = 0;
+            pov.hintSeen = false;
+            document.body.classList.add('pov-on');
+            povWrap.classList.add('on');
+            $('povHint').classList.remove('pov-hide');
+            $('povHint').style.opacity = 1;
+            $('povHint').style.visibility = 'visible';
+            pov.last = performance.now();
+            // zippo: click de la tapa, chispa de la piedra, y recién ahí el gas
+            noiseBurst(.05, 3200, 1800, 'highpass', .45);
+            setTimeout(() => noiseBurst(.04, 4200, 6000, 'highpass', .5), 140);
+            setTimeout(() => noiseBurst(.12, 2400, 1600, 'bandpass', .35), 260);
+            renderPack();
+            requestAnimationFrame(povLoop);
+        }
+
+        function endPOV(msg) {
+            pov.on = false;
+            pov.phase = 'out';
+            document.body.classList.remove('pov-on');
+            povWrap.classList.remove('on');
+            const pe = emberPosAt(PW, PH);
+            const p = aPantalla(pe.x, pe.y, pc.width, pc.height);
+            for (let i = 0; i < 26; i++) {
+                trail.push({
+                    x: p.x + (Math.random() - .5) * 30,
+                    y: p.y + (Math.random() - .5) * 20,
+                    vx: (Math.random() - .5) * 1.6,
+                    vy: -(.6 + Math.random() * 1.4),
+                    r: 4 + Math.random() * 7,
+                    a: .18 + Math.random() * .16,
+                    life: 0,
+                    max: 260,
+                    ph: Math.random() * Math.PI * 2
+                });
+            }
+            noiseBurst(1, 700, 250, 'lowpass', .4);
+            renderPack();
+            if (msg) toast(msg);
+        }
+
+        function emberPos() {
+            return emberPosAt(pc.width, pc.height);
+        }
+        function emberPosAt(W2, H2) {
+            const base = Math.min(W2, H2);
+            const dir = manoDir(W2, H2);
+            const burnFrac = Math.max(pov.burn, 0) / 100;
+            const paperLen = base * .16 * burnFrac;
+            const ashLen = base * .16 * (1 - burnFrac) * .62;
+            const pFist = manoPunto(W2, H2);
+            return {
+                x: pFist.x + dir.x * (base * .05 + paperLen + Math.max(ashLen, 3)),
+                y: pFist.y + dir.y * (base * .05 + paperLen + Math.max(ashLen, 3))
+            };
+        }
+
+        function manoDir(W2, H2) {
+            const w = { x: W2 * .92, y: H2 * 1.02 };
+            const target = { x: W2 * .52 + pov.mouse.x * .02, y: H2 * .30 + pov.mouse.y * .02 };
+            let dx = target.x - w.x, dy = target.y - w.y;
+            const L = Math.sqrt(dx * dx + dy * dy);
+            return { x: dx / L, y: dy / L };
+        }
+
+        function manoPunto(W2, H2) {
+            const base = Math.min(W2, H2);
+            const dir = manoDir(W2, H2);
+            return { x: W2 * .90 + dir.x * base * .30, y: H2 * .95 + dir.y * base * .30 };
+        }
+
+        function empezarCalada() {
+            if (!pov.on || pov.phase !== 'lit' || pov.inhalando) return;
+            pov.inhalando = true;
+            pov.inhale = 0;
+            pov.hintSeen = true;
+            $('povHint').classList.add('pov-hide');
+            // crepitar del papel al encenderse la brasa
+            noiseBurst(.5, 1800, 3200, 'bandpass', .30);
+        }
+
+        /* soltar el humo: las partículas NO salen de la brasa sino de tu boca
+           (borde inferior de la pantalla) y suben hacia la vista. Eso es lo que
+           se ve realmente cuando exhalás en primera persona. */
+        function terminarCalada() {
+            if (!pov.on || !pov.inhalando) return;
+            const dur = Math.min(pov.inhale, INHALE_MAX);
+            pov.inhalando = false;
+            pov.inhale = 0;
+            if (dur < .18) return;               // apenas la rozaste: no cuenta
+
+            const f = dur / INHALE_MAX;          // 0..1 según lo profunda que fue
+            pov.caladas++;
+            pov.exhale = 1;
+            pov.exhaleFuerza = f;
+            pov.flash = Math.max(pov.flash, .10 + f * .14);
+            pov.haze = Math.min(.52, pov.haze + .07 + f * .13);
+
+            noiseBurst(.9 + f * .5, 900, 220, 'lowpass', .35 + f * .2);
+            nico = Math.min(100, nico + 6 + f * 12);
+            store(K.nico, nico);
+            renderPack();
+        }
+
+        // emite el humo exhalado de forma progresiva, no todo de golpe
+        function humoExhalado(dt) {
+            if (pov.exhale <= 0) return;
+            const W2 = PW, H2 = PH;
+            pov.exhale = Math.max(0, pov.exhale - dt * 1.5);
+            const f = pov.exhaleFuerza;
+            const n = Math.round((2 + f * 4) * (pov.exhale > .55 ? 1 : .45));
+            for (let i = 0; i < n; i++) {
+                const spread = (Math.random() - .5) * W2 * .14;
+                pov.parts.push({
+                    x: W2 * .5 + spread,
+                    y: H2 * 1.02 + Math.random() * 12,
+                    vx: spread * .010 + (Math.random() - .5) * .22,
+                    vy: -(.62 + Math.random() * .95) * (.6 + f * .7),
+                    r: 5 + Math.random() * 9 + f * 5,
+                    a: .05 + Math.random() * .045 + f * .03,
+                    life: 0,
+                    max: 70 + Math.random() * 50 + f * 30,
+                    grow: 1.016 + Math.random() * .014,
+                    ph: Math.random() * Math.PI * 2,
+                    spin: (Math.random() - .5) * .07,   // el humo gira sobre sí mismo
+                    fuga: .00010 + f * .00010            // y deriva hacia el punto de fuga
+                });
+            }
+        }
+
+        // la ceniza acumulada se desprende sola cuando ya es muy larga
+        function tirarCeniza() {
+            const e = pov.ember;
+            for (let i = 0; i < 10; i++) {
+                pov.ash.push({
+                    x: e.x + (Math.random() - .5) * 4,
+                    y: e.y + (Math.random() - .5) * 3,
+                    vx: (Math.random() - .5) * .28,
+                    vy: .22 + Math.random() * .5,
+                    r: .8 + Math.random() * 1.3,
+                    life: 0,
+                    max: 110
+                });
+            }
+            pov.ashCol = 0;
+            noiseBurst(.18, 500, 200, 'lowpass', .18);
+        }
+
+        /* dónde cae la imagen 16:9 dentro del canvas (barras negras si sobra) */
+        function vistaRect(W2, H2) {
+            let w = W2, h = W2 * PH / PW;
+            if (h > H2) { h = H2; w = H2 * PW / PH; }
+            return { x: (W2 - w) / 2, y: (H2 - h) / 2, w: w, h: h };
+        }
+        // pasa un punto de la escena a coordenadas de pantalla
+        function aPantalla(x, y, W2, H2) {
+            const r = vistaRect(W2, H2);
+            return { x: r.x + x / PW * r.w, y: r.y + y / PH * r.h };
+        }
+
+        function povLoop(now) {
+            if (!pov.on) return;
+            const dt = Math.min(.05, (now - (pov.last || now)) / 1000);
+            pov.last = now;
+            pov.t += dt;
+            const W2 = pc.width, H2 = pc.height;
+
+            if (pov.phase === 'ignite') {
+                pov.phaseT += dt;
+                if (pov.phaseT > .9) {
+                    pov.phase = 'lit';
+                    noiseBurst(.5, 900, 450, 'lowpass', .35);
+                }
+            } else if (pov.phase === 'lit') {
+                // arde solo, y MUCHO más rápido mientras estás inhalando
+                let quema = BURN_SMOLDER;
+                if (pov.inhalando) {
+                    pov.inhale += dt;
+                    if (pov.inhale >= INHALE_MAX) terminarCalada();  // no entra más
+                    else quema += BURN_CALADA;
+                }
+                pov.burn = Math.max(0, pov.burn - dt * quema);
+                pov.ashCol += dt * quema;
+                if (pov.ashCol > 26) tirarCeniza();
+                if (pov.burn <= 0) {
+                    pov.phase = 'out';
+                    pov.flash = Math.max(pov.flash, .7);
+                    noiseBurst(1.2, 800, 200, 'lowpass', .5);
+                }
+            }
+            if (pov.phase === 'out') {
+                pov.phaseT += dt;
+                if (pov.phaseT > 1.2) {
+                    endPOV('se consumió entero. qué raro que no duela nada.');
+                    return;
+                }
+            }
+
+            pov.haze = Math.max(0, pov.haze - dt * .16);
+            pov.flash = Math.max(0, pov.flash - dt * 1.5);
+
+            pov.ember = emberPosAt(PW, PH);
+
+            /* el hilo fino de humo que sube SIEMPRE de la brasa: no son puffs
+               sueltos, es una columna continua que serpentea, se ensancha y
+               recién arriba se rompe en volutas. Lo más cigarrillo que hay. */
+            if ((pov.phase === 'lit' || pov.phase === 'ignite') && !pov.inhalando) {
+                const e = pov.ember;
+                pov.ribbon.push({
+                    x: e.x + (Math.random() - .5) * 1.2,
+                    y: e.y - 1,
+                    t: 0,
+                    ph: Math.random() * Math.PI * 2,
+                    amp: .35 + Math.random() * .5
+                });
+                if (pov.ribbon.length > 110) pov.ribbon.shift();
+                // arriba del todo, el hilo se deshace en volutas de verdad
+                if (Math.random() < dt * 2.2) {
+                    pov.parts.push({
+                        x: e.x + (Math.random() - .5) * 4,
+                        y: e.y - PH * .10 - Math.random() * PH * .06,
+                        vx: (Math.random() - .5) * .14,
+                        vy: -(.12 + Math.random() * .2),
+                        r: 2 + Math.random() * 3.4,
+                        a: .10 + Math.random() * .07,
+                        life: 0,
+                        max: 110,
+                        grow: 1.013,
+                        ph: Math.random() * Math.PI * 2,
+                        spin: (Math.random() - .5) * .05,
+                        fuga: .00006
+                    });
+                }
+            }
+
+            if ((pov.phase === 'lit' || pov.phase === 'ignite') && Math.random() < dt * .5) {
+                pov.ash.push({
+                    x: pov.ember.x - 1,
+                    y: pov.ember.y,
+                    vx: (Math.random() - .5) * .18,
+                    vy: .3 + Math.random() * .38,
+                    r: .9 + Math.random() * 1.2,
+                    life: 0,
+                    max: 90
+                });
+            }
+
+            humoExhalado(dt);
+
+            /* ---- render: TODO se dibuja en el buffer chico para que humo, escena
+               y niebla compartan la misma trama de píxeles y el mismo dithering,
+               como un frame real de motor de software. ---- */
+            dibujarEscena(PW, PH);
+
+            /* ---- hilo de humo de la brasa: cada punto sube serpenteando con
+               más amplitud cuanto más viejo, como humo laminar que se vuelve
+               turbulento. Se dibuja como cadena de blobs chicos: en el buffer
+               de baja resolución + dither se lee como una columna continua. ---- */
+            for (let i = pov.ribbon.length - 1; i >= 0; i--) {
+                const s = pov.ribbon[i];
+                s.t += dt;
+                const edad = s.t;                       // segundos vivo
+                s.y -= dt * (10 + edad * 5);
+                s.x += Math.sin(edad * 2.6 + s.ph) * s.amp * (edad * .9)
+                    + Math.sin(pov.t * .7 + s.ph * 2) * .06;   // brisa del cuarto
+                const al = Math.max(0, .30 - edad * .115);
+                if (al <= 0 || s.y < -8) { pov.ribbon.splice(i, 1); continue; }
+                const rr = .7 + edad * 1.9;
+                const g = lx.createRadialGradient(s.x, s.y, 0, s.x, s.y, rr);
+                g.addColorStop(0, 'rgba(196,200,190,' + al + ')');
+                g.addColorStop(1, 'rgba(170,176,166,0)');
+                lx.fillStyle = g;
+                lx.beginPath();
+                lx.arc(s.x, s.y, rr, 0, Math.PI * 2);
+                lx.fill();
+            }
+
+            /* ---- volutas: cada partícula son TRES lóbulos que rotan sobre su
+               centro (así el humo "hierve" en vez de ser globos perfectos), con
+               turbulencia doble seno y deriva hacia el punto de fuga. Cerca de
+               la brasa el humo se tiñe naranja: es la luz del sprite iluminando
+               el humo, como los sprites aditivos de GoldSrc. ---- */
+            for (let i = pov.parts.length - 1; i >= 0; i--) {
+                const p = pov.parts[i];
+                p.life++;
+                p.rot = (p.rot === undefined ? p.ph : p.rot) + (p.spin || .012);
+                p.x += p.vx
+                    + Math.sin(p.y * .02 + p.ph) * .5
+                    + Math.sin(p.life * .035 + p.ph * 2.3) * .22;
+                p.y += p.vy;
+                if (p.fuga) p.vx += (PW * .46 - p.x) * p.fuga;   // el cuarto se lo traga
+                p.vy *= .998;
+                p.r *= p.grow;
+                if (p.life > p.max || p.r > Math.max(PW, PH)) { pov.parts.splice(i, 1); continue; }
+                const alpha = p.a * Math.max(0, 1 - p.life / p.max);
+
+                // qué tan cerca de la brasa: mezcla gris frío -> naranja brasa
+                const dxE = p.x - pov.ember.x, dyE = p.y - pov.ember.y;
+                const warm = Math.max(0, 1 - Math.sqrt(dxE * dxE + dyE * dyE) / (PW * .13));
+                const cr = Math.round(186 + warm * 62),
+                    cg2 = Math.round(190 - warm * 22),
+                    cb = Math.round(178 - warm * 70);
+
+                for (let k = 0; k < 3; k++) {
+                    const a2 = p.rot + k * 2.094;
+                    const off = p.r * .34;
+                    const lxp = p.x + Math.cos(a2) * off;
+                    const lyp = p.y + Math.sin(a2) * off * .72;
+                    const lr = Math.max(.5, p.r * (.62 + .14 * Math.sin(p.life * .09 + k * 2)));
+                    const g = lx.createRadialGradient(lxp, lyp, 0, lxp, lyp, lr);
+                    g.addColorStop(0, 'rgba(' + cr + ',' + cg2 + ',' + cb + ',' + (alpha * .62) + ')');
+                    g.addColorStop(.7, 'rgba(168,172,160,' + alpha * .34 + ')');
+                    g.addColorStop(1, 'rgba(150,155,145,0)');
+                    lx.fillStyle = g;
+                    lx.beginPath();
+                    lx.arc(lxp, lyp, lr, 0, Math.PI * 2);
+                    lx.fill();
+                }
+            }
+
+            for (let i = pov.ash.length - 1; i >= 0; i--) {
+                const a = pov.ash[i];
+                a.life++;
+                a.x += a.vx;
+                a.y += a.vy;
+                a.vy += .02;
+                if (a.life > a.max || a.y > PH + 10) { pov.ash.splice(i, 1); continue; }
+                const al = .7 * Math.max(0, 1 - a.life / a.max);
+                lx.fillStyle = 'rgba(120,120,112,' + al + ')';
+                lx.fillRect(a.x, a.y, Math.max(1, a.r * .9), Math.max(1, a.r * .9));
+            }
+
+            // niebla de humo acumulado + golpe de la calada
+            if (pov.haze > .01) {
+                const hz = lx.createRadialGradient(PW / 2, PH / 2, 0, PW / 2, PH / 2, Math.max(PW, PH) * .7);
+                hz.addColorStop(0, 'rgba(172,176,164,' + (pov.haze * .42) + ')');
+                hz.addColorStop(1, 'rgba(172,176,164,0)');
+                lx.fillStyle = hz;
+                lx.fillRect(0, 0, PW, PH);
+            }
+            if (pov.flash > .01) {
+                lx.fillStyle = 'rgba(198,204,190,' + (pov.flash * .32) + ')';
+                lx.fillRect(0, 0, PW, PH);
+            }
+
+            // grado de color Cry of Fear + cuantización con dither (paleta de 8 bits)
+            // + aberración cromática cuando la nicotina pega: rojo y azul se separan
+            const inh2 = pov.inhalando ? Math.min(1, pov.inhale / INHALE_MAX) : 0;
+            const aberr = Math.min(1, pov.flash * 1.5 + inh2 * .85 + pov.exhale * .25);
+            gradeYDither(lx, PW, PH, aberr);
+
+            /* upscale sin suavizado, encajado en 16:9 y centrado. En vertical
+               quedan barras negras arriba y abajo, como un video viejo.
+               La cámara NO está fija: al calar hace un zoom sutil hacia la brasa
+               y con la nicotina alta todo el encuadre se mece (el mareo). */
+            const r = vistaRect(W2, H2);
+            const zoomCam = 1 + inh2 * .05 + pov.flash * .025;
+            const mareo = (nico / 100) * .8 + inh2 * .35 + pov.exhale * .25;
+            const angCam = Math.sin(pov.t * .85) * .010 * mareo;
+            px.setTransform(1, 0, 0, 1, 0, 0);
+            px.imageSmoothingEnabled = false;
+            px.fillStyle = '#000';
+            px.fillRect(0, 0, W2, H2);
+            px.save();
+            px.translate(W2 / 2, H2 / 2);
+            px.rotate(angCam);
+            px.scale(zoomCam, zoomCam);
+            px.translate(-W2 / 2, -H2 / 2);
+            px.drawImage(povLow, r.x, r.y, r.w, r.h);
+            px.restore();
+
+            /* glitch de tracking: cada tanto una franja horizontal se corre,
+               como cinta VHS mal rebobinada. Más seguido con el flash del humo. */
+            if (Math.random() < .015 + pov.flash * .12 + inh2 * .03) {
+                const gy = r.y + Math.random() * r.h;
+                const gh = 3 + Math.random() * Math.max(4, r.h * .03);
+                const gx = (Math.random() - .5) * r.w * .04;
+                const sy = (gy - r.y) / r.h * PH;
+                const sh = gh / r.h * PH;
+                px.drawImage(povLow, 0, sy, PW, Math.max(1, sh), r.x + gx, gy, r.w, gh);
+            }
+
+            // grano de cinta solo sobre la imagen, no sobre las barras
+            px.save();
+            px.beginPath();
+            px.rect(r.x, r.y, r.w, r.h);
+            px.clip();
+            grano(px, W2, H2, pov.phase === 'ignite' ? 90 : Math.round(55 + inh2 * 70 + pov.flash * 60));
+            px.restore();
+
+            // HUD
+            $('povPaper').textContent = Math.round(pov.burn) + '%';
+            $('povBurnBar').style.width = pov.burn + '%';
+            $('povAsh').textContent = Math.round(100 - pov.burn) + '%';
+            $('povNico').textContent = Math.round(nico) + '%';
+            const inhPct = pov.inhalando ? Math.min(100, (pov.inhale / INHALE_MAX) * 100) : 0;
+            $('povDrags').textContent = pov.caladas;
+            $('povAirBar').style.width = inhPct + '%';
+            $('povAir').textContent = pov.inhalando
+                ? (inhPct > 92 ? 'lleno' : 'entrando…')
+                : (pov.exhale > 0 ? 'soltando' : '—');
+            $('povTag').textContent = pov.phase === 'ignite'
+                ? '🚬 ENCENDIENDO…'
+                : (pov.inhalando ? '🚬 INHALANDO' : (pov.exhale > 0 ? '🚬 EXHALANDO' : '🚬 POV'));
+            $('povBtn').textContent = pov.phase === 'out' ? '…' : 'APAGAR';
+            if ($('povRec')) $('povRec').style.opacity = (Math.floor(pov.t * 2) % 2 === 0) ? 1 : .25;
+
+            if (!reduced) requestAnimationFrame(povLoop);
+        }
+
+        /* =====================================================================
+           ESCENA POV — lo que realmente hacía GoldSrc (Half-Life 1) y heredó
+           Cry of Fear:
+             · superficies TEXTURIZADAS sucias (no colores planos)
+             · lightmaps: charcos de luz suaves horneados sobre las paredes
+             · perspectiva de un punto de fuga: piso, techo y paredes que corren
+             · modelos con sombreado suave (Gouraud), no facetas duras
+             · paleta reducida de 8 bits con dithering ordenado (Bayer)
+           El pixelado NO es el efecto: es consecuencia de la resolución baja.
+           ===================================================================== */
+
+        const clamp255 = v => v < 0 ? 0 : (v > 255 ? 255 : v);
+
+        /* ---- texturas procedurales (se generan una sola vez) ----
+           ruido + manchas de humedad, como las texturas de 128x128 de la época */
+        function makeTex(w, h, base, ruido, manchas) {
+            const c = document.createElement('canvas');
+            c.width = w; c.height = h;
+            const g = c.getContext('2d');
+            const img = g.createImageData(w, h);
+            for (let y = 0; y < h; y++) {
+                for (let x = 0; x < w; x++) {
+                    const i = (y * w + x) * 4;
+                    // ruido fino + vetas suaves de baja frecuencia
+                    let n = (Math.random() - .5) * ruido;
+                    n += Math.sin(x * .55) * Math.sin(y * .47) * ruido * .12;
+                    n += Math.sin((x + y) * .21) * ruido * .08;
+                    img.data[i] = clamp255(base[0] + n);
+                    img.data[i + 1] = clamp255(base[1] + n);
+                    img.data[i + 2] = clamp255(base[2] + n);
+                    img.data[i + 3] = 255;
+                }
+            }
+            g.putImageData(img, 0, 0);
+            return c;
+        }
+
+        const TEX = {};
+        function initTex() {
+            if (TEX.listo) return;
+            TEX.pared = makeTex(128, 128, [104, 99, 84], 26, 18);   // yeso sucio
+            TEX.piso = makeTex(128, 128, [74, 60, 44], 30, 14);    // madera gastada
+            TEX.techo = makeTex(128, 128, [70, 68, 60], 20, 10);
+            TEX.puerta = makeTex(64, 64, [56, 44, 32], 22, 6);
+            TEX.listo = true;
+        }
+
+        // ruido determinista: misma mugre en cada frame, distinta por superficie
+        function rnd(seed) {
+            const x = Math.sin(seed * 127.1 + 311.7) * 43758.5453;
+            return x - Math.floor(x);
+        }
+
+        // rellena un polígono con textura fina + manchas grandes NO repetidas
+        function superficie(ctx, pts, tex, escala, luz, semilla) {
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(pts[0][0], pts[0][1]);
+            for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
+            ctx.closePath();
+            ctx.clip();
+
+            const pat = ctx.createPattern(tex, 'repeat');
+            ctx.save();
+            ctx.scale(escala, escala);
+            ctx.fillStyle = pat;
+            ctx.fillRect(-2000, -2000, 8000, 8000);
+            ctx.restore();
+
+            // bbox de la superficie para repartir la mugre a escala del muro
+            let x0 = 1e9, y0 = 1e9, x1 = -1e9, y1 = -1e9;
+            for (const p of pts) {
+                if (p[0] < x0) x0 = p[0]; if (p[0] > x1) x1 = p[0];
+                if (p[1] < y0) y0 = p[1]; if (p[1] > y1) y1 = p[1];
+            }
+            const bw = x1 - x0, bh = y1 - y0;
+            const sem = semilla || 1;
+            for (let i = 0; i < 7; i++) {
+                const mx = x0 + rnd(sem * 13 + i * 2.3) * bw;
+                const my = y0 + rnd(sem * 29 + i * 5.7) * bh;
+                const mr = (.16 + rnd(sem * 7 + i) * .34) * Math.max(bw, bh);
+                const g2 = ctx.createRadialGradient(mx, my, 0, mx, my, mr);
+                const osc = rnd(sem * 3 + i * 1.9) < .68;
+                g2.addColorStop(0, osc ? 'rgba(18,16,12,.34)' : 'rgba(132,126,104,.13)');
+                g2.addColorStop(1, 'rgba(0,0,0,0)');
+                ctx.fillStyle = g2;
+                ctx.fillRect(mx - mr, my - mr, mr * 2, mr * 2);
+            }
+
+            // sombreado base de la superficie (equivale al lightmap horneado)
+            ctx.fillStyle = 'rgba(0,0,0,' + (1 - luz) + ')';
+            ctx.fill();
+            ctx.restore();
+        }
+
+        // charco de luz suave, como un lightmap horneado
+        function lightmap(ctx, x, y, r, color, fuerza) {
+            const g = ctx.createRadialGradient(x, y, 0, x, y, r);
+            g.addColorStop(0, color.replace('%A%', fuerza));
+            g.addColorStop(.5, color.replace('%A%', fuerza * .35));
+            g.addColorStop(1, color.replace('%A%', 0));
+            ctx.fillStyle = g;
+            ctx.fillRect(x - r, y - r, r * 2, r * 2);
+        }
+
+        /* ---- grado de color + cuantización a paleta corta con dither Bayer 4x4.
+           Esto es lo que da el aire de 8 bits: bandas de color con trama, no
+           degradés limpios de 24 bits. ---- */
+        const BAYER = [
+            [0, 8, 2, 10],
+            [12, 4, 14, 6],
+            [3, 11, 1, 9],
+            [15, 7, 13, 5]
+        ];
+        function gradeYDither(ctx, W2, H2, aberr) {
+            const img = ctx.getImageData(0, 0, W2, H2);
+            const d = img.data;
+            /* aberración cromática: el canal rojo se corre a la izquierda y el
+               azul a la derecha. En Cry of Fear esto pasa cuando te pegan o te
+               falta cordura; acá pasa cuando la nicotina sube a la cabeza. */
+            if (aberr > .04) {
+                const k = Math.min(3, Math.round(aberr * 3));
+                const src = d.slice();
+                for (let y = 0; y < H2; y++) {
+                    const fila0 = y * W2;
+                    for (let x = 0; x < W2; x++) {
+                        const i = (fila0 + x) * 4;
+                        const xr = Math.min(W2 - 1, x + k);
+                        const xb = Math.max(0, x - k);
+                        d[i] = src[(fila0 + xr) * 4];
+                        d[i + 2] = src[(fila0 + xb) * 4 + 2];
+                    }
+                }
+            }
+            const niveles = 9;                    // tonos por canal
+            const paso = 255 / (niveles - 1);
+            for (let y = 0; y < H2; y++) {
+                const fila = BAYER[y & 3];
+                for (let x = 0; x < W2; x++) {
+                    const i = (y * W2 + x) * 4;
+                    let r = d[i], g = d[i + 1], b = d[i + 2];
+                    // Cry of Fear: desaturado, frío, negros aplastados
+                    const lum = r * .299 + g * .587 + b * .114;
+                    r = lum + (r - lum) * .42;
+                    g = lum + (g - lum) * .48;
+                    b = lum + (b - lum) * .50;
+                    r *= .90; g *= .97; b *= .93;   // leve viraje verde-frío
+                    // leve lift de medios: evita que todo caiga al negro y el
+                    // dither degenere en un damero uniforme
+                    r = 12 + r * .94; g = 14 + g * .94; b = 12 + b * .94;
+                    const t = (fila[x & 3] / 16 - .5) * paso * .6;
+                    d[i] = clamp255(Math.round((r + t) / paso) * paso);
+                    d[i + 1] = clamp255(Math.round((g + t) / paso) * paso);
+                    d[i + 2] = clamp255(Math.round((b + t) / paso) * paso);
+                }
+            }
+            ctx.putImageData(img, 0, 0);
+        }
+
+        // grano de cinta, a resolución completa
+        function grano(ctx, W2, H2, n) {
+            for (let i = 0; i < n; i++) {
+                const x = Math.random() * W2, y = Math.random() * H2;
+                ctx.fillStyle = Math.random() > .5 ? 'rgba(255,255,255,.045)' : 'rgba(0,0,0,.07)';
+                ctx.fillRect(x, y, 2, 2);
+            }
+            if (Math.random() < .04) {
+                const ly = Math.random() * H2;
+                ctx.fillStyle = 'rgba(190,200,180,.05)';
+                ctx.fillRect(0, ly, W2, 1 + Math.random() * 2);
+            }
+        }
+
+        /* ---- el cuarto: perspectiva de un punto, como un pasillo de HL1 ---- */
+        function dibujarCuarto(ctx, W2, H2, vpx, vpy) {
+            // rectángulo de la pared del fondo alrededor del punto de fuga
+            const bw = W2 * .34, bh = bw * .78;
+            const bx0 = vpx - bw / 2, bx1 = vpx + bw / 2;
+            const by0 = vpy - bh / 2, by1 = vpy + bh / 2;
+
+            // techo, piso y paredes laterales corren hacia el punto de fuga
+            superficie(ctx, [[0, 0], [W2, 0], [bx1, by0], [bx0, by0]], TEX.techo, .55, .52, 11);
+            superficie(ctx, [[0, H2], [W2, H2], [bx1, by1], [bx0, by1]], TEX.piso, .62, .80, 23);
+            superficie(ctx, [[0, 0], [bx0, by0], [bx0, by1], [0, H2]], TEX.pared, .52, .88, 37);
+            superficie(ctx, [[W2, 0], [bx1, by0], [bx1, by1], [W2, H2]], TEX.pared, .52, .72, 51);
+            superficie(ctx, [[bx0, by0], [bx1, by0], [bx1, by1], [bx0, by1]], TEX.pared, .48, .68, 67);
+
+            // tablas del piso convergiendo al punto de fuga (esto es lo que vende
+            // la perspectiva, más que la textura)
+            ctx.strokeStyle = 'rgba(0,0,0,.68)';
+            ctx.lineWidth = 1;
+            for (let i = -4; i <= 4; i++) {
+                const fx = W2 / 2 + i * (W2 * .17);
+                ctx.beginPath();
+                ctx.moveTo(fx, H2);
+                ctx.lineTo(vpx + (fx - W2 / 2) * .18, by1);
+                ctx.stroke();
+            }
+            // listones transversales, más juntos hacia el fondo
+            for (let k = 1; k <= 7; k++) {
+                const f = Math.pow(k / 8, 2.1);
+                const yy = H2 - (H2 - by1) * f;
+                ctx.strokeStyle = 'rgba(0,0,0,' + (.46 * (1 - f * .5)) + ')';
+                ctx.beginPath();
+                ctx.moveTo(0 + (bx0) * f, yy);
+                ctx.lineTo(W2 - (W2 - bx1) * f, yy);
+                ctx.stroke();
+            }
+
+            // zócalo / moldura donde la pared toca el piso
+            ctx.strokeStyle = 'rgba(24,20,16,.75)';
+            ctx.lineWidth = Math.max(1, H2 * .012);
+            ctx.beginPath();
+            ctx.moveTo(0, H2 * .995); ctx.lineTo(bx0, by1);
+            ctx.moveTo(W2, H2 * .995); ctx.lineTo(bx1, by1);
+            ctx.moveTo(bx0, by1); ctx.lineTo(bx1, by1);
+            ctx.stroke();
+
+            // puerta entreabierta en la pared del fondo: negro absoluto detrás
+            const dw = bw * .30, dh = bh * .62;
+            const dx = bx0 + bw * .13, dy = by1 - dh;
+            superficie(ctx, [[dx, dy], [dx + dw, dy], [dx + dw, by1], [dx, by1]], TEX.puerta, .5, .55, 97);
+            ctx.fillStyle = '#000';
+            ctx.fillRect(dx + dw * .55, dy + dh * .06, dw * .40, dh * .94);
+            ctx.strokeStyle = 'rgba(15,13,10,.9)';
+            ctx.lineWidth = 1;
+            ctx.strokeRect(dx, dy, dw, dh);
+
+            // ventana en la pared izquierda (trapecio por la perspectiva),
+            // luz de sodio de la calle entrando sucia
+            const wy0 = vpy - bh * .62, wy1 = vpy + bh * .30;
+            const wxa = W2 * .06, wxb = W2 * .20;
+            const ty0 = by0 + (wy0 - by0) * .55, ty1 = by0 + (wy1 - by0) * .78;
+            ctx.save();
+            ctx.beginPath();
+            ctx.moveTo(wxa, wy0); ctx.lineTo(wxb, ty0);
+            ctx.lineTo(wxb, ty1); ctx.lineTo(wxa, wy1);
+            ctx.closePath();
+            ctx.clip();
+            ctx.fillStyle = 'rgba(96,104,64,.55)';
+            ctx.fillRect(wxa, wy0 - 10, wxb - wxa + 10, wy1 - wy0 + 20);
+            lightmap(ctx, (wxa + wxb) / 2, (wy0 + wy1) / 2, (wy1 - wy0) * .9, 'rgba(150,160,96,%A%)', .55);
+            // cruceta de la ventana
+            ctx.strokeStyle = 'rgba(8,8,6,.92)';
+            ctx.lineWidth = Math.max(1.5, W2 * .006);
+            ctx.beginPath();
+            ctx.moveTo(wxa, (wy0 + wy1) / 2); ctx.lineTo(wxb, (ty0 + ty1) / 2);
+            ctx.moveTo((wxa + wxb) / 2, wy0 - 4); ctx.lineTo((wxa + wxb) / 2, wy1 + 4);
+            ctx.stroke();
+            ctx.restore();
+
+            // el charco de luz que la ventana tira sobre el piso y la pared
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            lightmap(ctx, W2 * .24, H2 * .84, W2 * .34, 'rgba(138,150,98,%A%)', .26);
+            lightmap(ctx, W2 * .10, H2 * .45, W2 * .24, 'rgba(138,150,98,%A%)', .17);
+            ctx.restore();
+        }
+
+        /* ---- cajetilla + encendedor apoyados en una repisa, con volumen ---- */
+        function dibujarCajetilla(ctx, W2, H2) {
+            const bw = W2 * .085, bh = H2 * .15, dep = bw * .38;
+            const bx = W2 * .06, by = H2 * .70;
+
+            // repisa
+            superficie(ctx, [[bx - bw * .6, by + bh], [bx + bw * 2.6, by + bh * .92],
+            [bx + bw * 2.7, by + bh * 1.12], [bx - bw * .6, by + bh * 1.2]], TEX.piso, .40, .78, 83);
+
+            // caja: cara frontal con sombreado suave (no color plano)
+            const fg = ctx.createLinearGradient(bx, by, bx + bw, by + bh);
+            fg.addColorStop(0, '#5d564a');
+            fg.addColorStop(.45, '#7c7462');
+            fg.addColorStop(1, '#4a453b');
+            ctx.fillStyle = fg;
+            ctx.fillRect(bx, by, bw, bh);
+            // banda inferior más oscura (el "diseño" de la cajetilla)
+            const bg2 = ctx.createLinearGradient(bx, by + bh * .58, bx, by + bh);
+            bg2.addColorStop(0, '#5a2420');
+            bg2.addColorStop(1, '#3a1614');
+            ctx.fillStyle = bg2;
+            ctx.fillRect(bx, by + bh * .58, bw, bh * .42);
+            // cara lateral en perspectiva
+            const sg = ctx.createLinearGradient(bx + bw, by, bx + bw + dep, by);
+            sg.addColorStop(0, '#3e3933');
+            sg.addColorStop(1, '#2a2721');
+            ctx.fillStyle = sg;
+            ctx.beginPath();
+            ctx.moveTo(bx + bw, by);
+            ctx.lineTo(bx + bw + dep, by - bh * .10);
+            ctx.lineTo(bx + bw + dep, by + bh * .90);
+            ctx.lineTo(bx + bw, by + bh);
+            ctx.closePath();
+            ctx.fill();
+            // tapa abierta
+            ctx.fillStyle = '#6d6656';
+            ctx.beginPath();
+            ctx.moveTo(bx, by);
+            ctx.lineTo(bx + bw, by);
+            ctx.lineTo(bx + bw + dep * .8, by - bh * .12);
+            ctx.lineTo(bx + dep * .3, by - bh * .10);
+            ctx.closePath();
+            ctx.fill();
+            // hueco interior de la tapa
+            ctx.fillStyle = '#14120e';
+            ctx.fillRect(bx + bw * .12, by - bh * .06, bw * .74, bh * .07);
+            // cigarrillos asomando
+            for (let i = 0; i < 3; i++) {
+                ctx.fillStyle = '#b6ab8e';
+                ctx.fillRect(bx + bw * (.16 + i * .24), by - bh * .12, bw * .16, bh * .07);
+            }
+            // etiqueta
+            ctx.fillStyle = 'rgba(20,18,14,.8)';
+            ctx.font = Math.max(5, bw * .17) + 'px "Press Start 2P", monospace';
+            ctx.textBaseline = 'middle';
+            ctx.fillText('JOSU', bx + bw * .14, by + bh * .30);
+
+            // encendedor, con brillo especular suave
+            const lx0 = bx + bw * 1.55, ly0 = by + bh * .46, lw = bw * .30, lh = bh * .54;
+            const eg = ctx.createLinearGradient(lx0, ly0, lx0 + lw, ly0);
+            eg.addColorStop(0, '#243c26');
+            eg.addColorStop(.4, '#3f6b42');
+            eg.addColorStop(1, '#1d3020');
+            ctx.fillStyle = eg;
+            ctx.fillRect(lx0, ly0, lw, lh);
+            ctx.fillStyle = '#8d8d84';
+            ctx.fillRect(lx0 + lw * .12, ly0 - lh * .17, lw * .76, lh * .17);
+
+            // sombras proyectadas sobre la repisa
+            ctx.fillStyle = 'rgba(0,0,0,.45)';
+            ctx.fillRect(bx - bw * .06, by + bh, bw + dep, bh * .07);
+            ctx.fillRect(lx0 - lw * .1, ly0 + lh, lw * 1.3, lh * .12);
+
+            // la luz de la ventana cae sobre la repisa: sin esto la cajetilla
+            // se pierde en el negro
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            lightmap(ctx, bx + bw * .9, by + bh * .35, bw * 3.4, 'rgba(150,158,110,%A%)', .17);
+            ctx.restore();
+        }
+
+        /* ---- mano y cigarrillo: viewmodel con sombreado suave estilo HL1 ---- */
+        function dibujarMano(ctx, W2, H2) {
+            const base = Math.min(W2, H2);
+            const dir = manoDir(W2, H2);
+            const pFist = manoPunto(W2, H2);
+            const n = { x: -dir.y, y: dir.x };
+            const e = emberPosAt(W2, H2);
+            const burnFrac = Math.max(pov.burn, 0) / 100;
+            const filterLen = base * .05;
+            const paperLen = base * .17 * burnFrac;
+            const ashLen = base * .17 * (1 - burnFrac) * .62;
+
+            // manga: degradé suave, oscura
+            const mg = ctx.createLinearGradient(W2 * .62, H2, pFist.x, pFist.y);
+            mg.addColorStop(0, '#0e0d0a');
+            mg.addColorStop(.6, '#1b1913');
+            mg.addColorStop(1, '#26221a');
+            ctx.fillStyle = mg;
+            ctx.beginPath();
+            ctx.moveTo(W2 * .52, H2 + 5);
+            ctx.bezierCurveTo(W2 * .60, H2 * .80, W2 * .66, H2 * .68,
+                pFist.x - dir.x * 30 + n.x * 16, pFist.y - dir.y * 30 + n.y * 16);
+            ctx.lineTo(pFist.x - dir.x * 26 - n.x * 20, pFist.y - dir.y * 26 - n.y * 20);
+            ctx.bezierCurveTo(W2 * .82, H2 * .70, W2 * .96, H2 * .84, W2 + 20, H2 + 5);
+            ctx.closePath();
+            ctx.fill();
+
+            // dorso de la mano: sombreado Gouraud (degradé continuo, no facetas)
+            const hg = ctx.createLinearGradient(
+                pFist.x - n.x * 26, pFist.y - n.y * 26,
+                pFist.x + n.x * 26, pFist.y + n.y * 26);
+            hg.addColorStop(0, '#4a331f');
+            hg.addColorStop(.35, '#7d5a33');
+            hg.addColorStop(.72, '#a97c46');
+            hg.addColorStop(1, '#6b4c2c');
+            ctx.fillStyle = hg;
+            ctx.beginPath();
+            ctx.moveTo(pFist.x - dir.x * 34 - n.x * 20, pFist.y - dir.y * 34 - n.y * 20);
+            ctx.quadraticCurveTo(pFist.x + dir.x * 8 - n.x * 30, pFist.y + dir.y * 8 - n.y * 30,
+                pFist.x + dir.x * 30 - n.x * 12, pFist.y + dir.y * 30 - n.y * 12);
+            ctx.quadraticCurveTo(pFist.x + dir.x * 36 + n.x * 10, pFist.y + dir.y * 36 + n.y * 10,
+                pFist.x + dir.x * 20 + n.x * 26, pFist.y + dir.y * 20 + n.y * 26);
+            ctx.quadraticCurveTo(pFist.x - dir.x * 14 + n.x * 30, pFist.y - dir.y * 14 + n.y * 30,
+                pFist.x - dir.x * 34 + n.x * 16, pFist.y - dir.y * 34 + n.y * 16);
+            ctx.closePath();
+            ctx.fill();
+
+            // dedos índice y medio que sostienen el cigarrillo
+            function dedo(off, largo, ancho, c0, c1) {
+                const bx0 = pFist.x + n.x * off + dir.x * 14;
+                const by0 = pFist.y + n.y * off + dir.y * 14;
+                const g = ctx.createLinearGradient(bx0 - n.x * ancho, by0 - n.y * ancho,
+                    bx0 + n.x * ancho, by0 + n.y * ancho);
+                g.addColorStop(0, c0);
+                g.addColorStop(.6, c1);
+                g.addColorStop(1, '#5c4028');
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.moveTo(bx0 - n.x * ancho, by0 - n.y * ancho);
+                ctx.lineTo(bx0 + dir.x * largo - n.x * ancho * .7, by0 + dir.y * largo - n.y * ancho * .7);
+                ctx.quadraticCurveTo(bx0 + dir.x * (largo + ancho), by0 + dir.y * (largo + ancho),
+                    bx0 + dir.x * largo + n.x * ancho * .7, by0 + dir.y * largo + n.y * ancho * .7);
+                ctx.lineTo(bx0 + n.x * ancho, by0 + n.y * ancho);
+                ctx.closePath();
+                ctx.fill();
+            }
+            dedo(-13, 30, 7, '#8a6238', '#b0823f');
+            dedo(4, 27, 7, '#7d5a33', '#a97c46');
+
+            /* cigarrillo: filtro, papel y ceniza como cilindros con degradé
+               transversal (brillo arriba, sombra abajo) — no líneas planas */
+            const cigIni = { x: pFist.x + dir.x * (filterLen * .35), y: pFist.y + dir.y * (filterLen * .35) };
+            const wc = base * .0115;
+            function cilindro(p0, largo, cTop, cMid, cBot) {
+                if (largo < .5) return p0;
+                const p1 = { x: p0.x + dir.x * largo, y: p0.y + dir.y * largo };
+                const g = ctx.createLinearGradient(p0.x - n.x * wc, p0.y - n.y * wc,
+                    p0.x + n.x * wc, p0.y + n.y * wc);
+                g.addColorStop(0, cTop);
+                g.addColorStop(.45, cMid);
+                g.addColorStop(1, cBot);
+                ctx.fillStyle = g;
+                ctx.beginPath();
+                ctx.moveTo(p0.x - n.x * wc, p0.y - n.y * wc);
+                ctx.lineTo(p1.x - n.x * wc, p1.y - n.y * wc);
+                ctx.lineTo(p1.x + n.x * wc, p1.y + n.y * wc);
+                ctx.lineTo(p0.x + n.x * wc, p0.y + n.y * wc);
+                ctx.closePath();
+                ctx.fill();
+                return p1;
+            }
+            // filtro (naranja apagado) apenas asomando de los dedos
+            cilindro({ x: cigIni.x - dir.x * filterLen * .5, y: cigIni.y - dir.y * filterLen * .5 },
+                filterLen * .6, '#b98a4e', '#9a6f3c', '#6a4a26');
+            const pEnd = cilindro(cigIni, paperLen, '#efe7d2', '#d8ccae', '#9d9276');
+            const aEnd = cilindro(pEnd, ashLen, '#8e8b82', '#63605a', '#3a3833');
+
+            /* brasa + luz dinámica sobre la mano: en HL1 los sprites de fuego
+               iluminaban la geometría cercana. eso es lo que hace que el
+               cigarrillo se sienta dentro de la escena y no pegado encima. */
+            // al inhalar, el aire aviva la brasa: crece, se pone amarilla y palpita
+            const inh = pov.inhalando ? Math.min(1, pov.inhale / INHALE_MAX) : 0;
+            const emberR = base * .012 * (1 + .16 * Math.sin(pov.t * 9))
+                * (1 + inh * .85);
+            const fuerza = pov.phase === 'ignite'
+                ? (.55 + Math.random() * .35)
+                : (.26 + inh * 1.15 + pov.exhale * .18 + Math.random() * inh * .25);
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            lightmap(ctx, e.x, e.y, base * .30, 'rgba(255,138,46,%A%)', fuerza * .34);
+            lightmap(ctx, e.x, e.y, emberR * 4.5, 'rgba(255,180,90,%A%)', fuerza * .62);
+            ctx.restore();
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            const cg = ctx.createRadialGradient(e.x, e.y, 0, e.x, e.y, emberR * 1.5);
+            cg.addColorStop(0, inh > .35 ? 'rgba(255,251,230,1)' : 'rgba(255,233,176,1)');
+            cg.addColorStop(.45, inh > .35 ? 'rgba(255,181,52,.9)' : 'rgba(255,138,30,.85)');
+            cg.addColorStop(1, 'rgba(180,60,0,0)');
+            ctx.fillStyle = cg;
+            ctx.beginPath();
+            ctx.arc(e.x, e.y, emberR * 1.5, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+
+            /* ---- ENCENDIDO: la otra mano entra desde la izquierda con el
+               encendedor. La llama es un sprite que tiembla, ilumina TODO
+               (mano, cigarrillo, cara del cuarto) y suelta chispas al
+               principio. Al pasar el ignite, la mano se retira sola. ---- */
+            if (pov.phase === 'ignite') {
+                const t = pov.phaseT;                      // 0 -> .9
+                // la mano entra rápido y al final empieza a bajar
+                const entra = Math.min(1, t / .25);
+                const sale = Math.max(0, (t - .72) / .18);
+                const hx0 = e.x - base * .30 + entra * base * .22 + sale * base * .10;
+                const hy0 = e.y + base * .16 - entra * base * .10 + sale * base * .22;
+                const tiembla = Math.sin(pov.t * 22) * base * .004;
+
+                // brazo desde abajo-izquierda
+                const bg3 = ctx.createLinearGradient(0, H2, hx0, hy0);
+                bg3.addColorStop(0, '#0c0b08');
+                bg3.addColorStop(1, '#221e16');
+                ctx.fillStyle = bg3;
+                ctx.beginPath();
+                ctx.moveTo(-10, H2 + 10);
+                ctx.quadraticCurveTo(hx0 - base * .16, H2 * .9, hx0 - base * .02, hy0 + base * .05);
+                ctx.lineTo(hx0 + base * .05, hy0 + base * .10);
+                ctx.quadraticCurveTo(hx0 - base * .04, H2 * 1.0, W2 * .18, H2 + 10);
+                ctx.closePath();
+                ctx.fill();
+
+                // puño cerrado alrededor del encendedor
+                const pg = ctx.createRadialGradient(hx0, hy0 + base * .03, 0, hx0, hy0 + base * .03, base * .06);
+                pg.addColorStop(0, '#a97c46');
+                pg.addColorStop(.6, '#7d5a33');
+                pg.addColorStop(1, '#4a331f');
+                ctx.fillStyle = pg;
+                ctx.beginPath();
+                ctx.ellipse(hx0, hy0 + base * .035, base * .052, base * .062, -.3, 0, Math.PI * 2);
+                ctx.fill();
+
+                // el encendedor verde (el mismo de la repisa)
+                const lw2 = base * .022, lh2 = base * .05;
+                const eg2 = ctx.createLinearGradient(hx0 - lw2 / 2, hy0, hx0 + lw2 / 2, hy0);
+                eg2.addColorStop(0, '#243c26');
+                eg2.addColorStop(.4, '#3f6b42');
+                eg2.addColorStop(1, '#1d3020');
+                ctx.fillStyle = eg2;
+                ctx.fillRect(hx0 - lw2 / 2, hy0 - lh2 * .4, lw2, lh2);
+                ctx.fillStyle = '#8d8d84';
+                ctx.fillRect(hx0 - lw2 * .38, hy0 - lh2 * .55, lw2 * .76, lh2 * .16);
+
+                // la llama: dos gotas superpuestas que bailan
+                const fx = hx0 + tiembla, fy = hy0 - lh2 * .55;
+                const flH = base * (.05 + .018 * Math.sin(pov.t * 17) + .01 * Math.random()) * entra * (1 - sale);
+                if (flH > .5) {
+                    ctx.save();
+                    ctx.globalCompositeOperation = 'lighter';
+                    const fg2 = ctx.createRadialGradient(fx, fy - flH * .4, 0, fx, fy - flH * .4, flH);
+                    fg2.addColorStop(0, 'rgba(255,244,200,.95)');
+                    fg2.addColorStop(.4, 'rgba(255,170,60,.7)');
+                    fg2.addColorStop(1, 'rgba(200,80,10,0)');
+                    ctx.fillStyle = fg2;
+                    ctx.beginPath();
+                    ctx.ellipse(fx, fy - flH * .45, flH * .42, flH * .8, Math.sin(pov.t * 9) * .12, 0, Math.PI * 2);
+                    ctx.fill();
+                    // núcleo azul del gas, pegado al pico
+                    const az = ctx.createRadialGradient(fx, fy - flH * .12, 0, fx, fy - flH * .12, flH * .3);
+                    az.addColorStop(0, 'rgba(140,180,255,.8)');
+                    az.addColorStop(1, 'rgba(60,90,200,0)');
+                    ctx.fillStyle = az;
+                    ctx.beginPath();
+                    ctx.arc(fx, fy - flH * .12, flH * .3, 0, Math.PI * 2);
+                    ctx.fill();
+                    // chispas de la piedra en los primeros frames
+                    if (t < .2) {
+                        for (let i = 0; i < 3; i++) {
+                            ctx.fillStyle = 'rgba(255,220,140,' + (.5 + Math.random() * .5) + ')';
+                            ctx.fillRect(fx + (Math.random() - .5) * flH,
+                                fy - Math.random() * flH * .8, 1.2, 1.2);
+                        }
+                    }
+                    // la llama ilumina la escena entera, no solo su pixel
+                    lightmap(ctx, fx, fy - flH * .4, base * .45, 'rgba(255,160,60,%A%)', .5 * entra * (1 - sale));
+                    lightmap(ctx, fx, fy - flH * .4, base * .14, 'rgba(255,220,150,%A%)', .8 * entra * (1 - sale));
+                    ctx.restore();
+                }
+            }
+        }
+
+        /* El cuarto es geometría estática: se hornea UNA vez a un canvas aparte
+           (como un mapa precompilado con sus lightmaps) y cada frame solo se
+           blitea con el desplazamiento del cabeceo. Lo dinámico —mano, brasa,
+           humo— se dibuja encima. */
+        const cuarto = document.createElement('canvas');
+        const cx2 = cuarto.getContext('2d');
+        let cuartoKey = '', PAD = 0;
+
+        function hornearCuarto(W2, H2) {
+            const key = W2 + 'x' + H2;
+            if (cuartoKey === key) return;
+            PAD = Math.ceil(W2 * .035);
+            const CW = W2 + PAD * 2, CH = H2 + PAD * 2;
+            cuarto.width = CW; cuarto.height = CH;
+            cx2.setTransform(1, 0, 0, 1, 0, 0);
+            cx2.fillStyle = '#000';
+            cx2.fillRect(0, 0, CW, CH);
+            dibujarCuarto(cx2, CW, CH, CW * .46, CH * .50);
+            dibujarCajetilla(cx2, CW, CH);
+            cuartoKey = key;
+        }
+
+        function dibujarEscena(W2, H2) {
+            const ctx = lx;
+            initTex();
+            hornearCuarto(W2, H2);
+            const base = Math.min(W2, H2);
+
+            // pequeño cabeceo de respiración: el viewmodel nunca está quieto en HL1
+            const bobX = Math.sin(pov.t * 1.1) * W2 * .004 + pov.mouse.x * W2 * .02;
+            const bobY = Math.cos(pov.t * .8) * H2 * .005 + pov.mouse.y * H2 * .02;
+
+            ctx.setTransform(1, 0, 0, 1, 0, 0);
+            ctx.fillStyle = '#000';
+            ctx.fillRect(0, 0, W2, H2);
+            ctx.drawImage(cuarto, -PAD - bobX, -PAD - bobY);
+
+            /* la lámpara de sodio de la calle NO es constante: zumba, palpita,
+               y cada tanto se corta unos frames y el cuarto se queda solo con
+               la brasa. Muy Cry of Fear: la luz nunca es de fiar. */
+            if (pov.lampOff <= 0 && Math.random() < .006) pov.lampOff = 6 + Math.random() * 22;
+            pov.lampOff = Math.max(0, pov.lampOff - 1);
+            const lampA = pov.lampOff > 0
+                ? .03
+                : (.15 + Math.sin(pov.t * 13.7) * .03 + Math.random() * .05);
+            ctx.save();
+            ctx.globalCompositeOperation = 'lighter';
+            lightmap(ctx, W2 * .13, H2 * .42, W2 * .30, 'rgba(150,160,96,%A%)', lampA);
+            lightmap(ctx, W2 * .24, H2 * .84, W2 * .38, 'rgba(138,150,98,%A%)', lampA * .8);
+            ctx.restore();
+            if (pov.lampOff > 0) {
+                // sin la lámpara, el cuarto entero se hunde un poco en el negro
+                ctx.fillStyle = 'rgba(0,0,0,.22)';
+                ctx.fillRect(0, 0, W2, H2);
+            }
+
+            dibujarMano(ctx, W2, H2);
+
+            // viñeta: el cuarto se come la luz en los bordes (muy Cry of Fear)
+            const vg = ctx.createRadialGradient(W2 * .5, H2 * .5, base * .18,
+                W2 * .5, H2 * .5, base * .95);
+            vg.addColorStop(0, 'rgba(0,0,0,0)');
+            vg.addColorStop(.65, 'rgba(0,0,0,.22)');
+            vg.addColorStop(1, 'rgba(0,0,0,.62)');
+            ctx.fillStyle = vg;
+            ctx.fillRect(0, 0, W2, H2);
+        }
+
+        povWrap.addEventListener('mousemove', e => {
+            if (!pov.on) return;
+            const r = povWrap.getBoundingClientRect();
+            pov.mouse.x = (e.clientX - r.left) / r.width - .5;
+            pov.mouse.y = (e.clientY - r.top) / r.height - .5;
+        });
+
+        povWrap.addEventListener('mousedown', e => {
+            if (e.target.id === 'povBtn') return;
+            empezarCalada();
+        });
+        addEventListener('mouseup', () => terminarCalada());
+        povWrap.addEventListener('touchstart', e => {
+            if (e.target.id === 'povBtn') return;
+            e.preventDefault();
+            empezarCalada();
+        }, { passive: false });
+        addEventListener('touchend', () => terminarCalada());
+
+        $('povBtn').addEventListener('click', e => {
+            e.stopPropagation();
+            if (pov.on && pov.phase !== 'out') endPOV('apagado a mitad. el papel duele menos que dejarlo tirado.');
+        });
+
+        $('btnPOV').addEventListener('click', () => {
+            if (pov.on) return;
+            startPOV();
+        });
+
+        addEventListener('keydown', e => {
+            if (e.key.toLowerCase() === 'f' && !/input|textarea/i.test(document.activeElement.tagName)) {
+                if (pov.on) {
+                    if (pov.phase === 'lit' && !e.repeat) empezarCalada();
+                } else if (!e.repeat) {
+                    startPOV();
+                }
+            }
+            if (e.key === 'Escape' && pov.on && pov.phase !== 'out') {
+                endPOV('apagado a mitad. mañana se decide.');
+            }
+        });
+
+        addEventListener('keyup', e => {
+            if (e.key.toLowerCase() === 'f') terminarCalada();
+        });
+        // si perdés el foco de la pestaña a media calada, se suelta sola
+        addEventListener('blur', () => terminarCalada());
+
+        // si el usuario elige no ver animaciones, no corremos el loop
+        if (!reduced) requestAnimationFrame(ambientLoop);
+
+        renderPack();
+
+        /* en táctil, el hint no puede hablar de [F] ni de Esc: se cala con el
+           dedo y se apaga con el botón */
+        if (matchMedia('(pointer:coarse)').matches) {
+            $('povHint').innerHTML =
+                'mantené el dedo en la pantalla para dar una calada' +
+                '<br><small>soltá para exhalar · APAGAR para dejarlo antes</small>';
+        }
+
+        /* ---------- lluvia de ceniza (fondo) ---------- */
+        setInterval(lluvia, 900);
+        function lluvia() {
+            if (reduced) return;
+            const colores = ['#fff', '#c0143c', '#888', '#ff7a18'];
+            for (let i = 0; i < 12; i++) {
+                const g = document.createElement('div');
+                g.className = 'ceniza';
+                g.style.left = Math.random() * 100 + 'vw';
+                g.style.width = g.style.height = (2 + Math.random() * 2) + 'px';
+                g.style.animationDuration = (5 + Math.random() * 7) + 's';
+                g.style.animationDelay = (Math.random() * 6) + 's';
+                g.style.background = colores[Math.floor(Math.random() * colores.length)];
+                document.body.appendChild(g);
+                setTimeout(() => g.remove(), 14000);
+            }
+        }
+        lluvia();
+
+        /* ---------- contador / reloj ---------- */
+        let v = store('bsj_v2_visitas');
+        v = (v || 0) + 1;
+        store('bsj_v2_visitas', v);
+        $('counter').textContent = String(v).padStart(6, '0');
+
+        function tick() {
+            const d = new Date();
+            $('clock').textContent = [d.getHours(), d.getMinutes(), d.getSeconds()]
+                .map(x => String(x).padStart(2, '0')).join(':');
+        }
+        tick();
+        setInterval(tick, 1000);
+
+        /* ---------- estado / frases ---------- */
+        const moods = ['despierto', 'lejos', 'en silencio', 'escribiendo', 'algo menos', 'releyendo el mismo párrafo'];
+        let mi = 0;
+        function mood() {
+            $('mood').textContent = moods[mi % moods.length];
+            mi++;
+        }
+        mood();
+        setInterval(mood, 12000);
+
+        const quotes = [
+            '"siete centímetros de papel y veinte minutos de silencio."',
+            '"dejé de esperar que las canciones sepan explicar."',
+            '"la noche no tiene horario, y yo tampoco."',
+            '"el café se enfrió más rápido que mis ganas."',
+            '"todavía no aprendo a pedir ayuda, pero subo el volumen."',
+            '"si esto es un diario, es uno sin candado desde el día uno."'
+        ];
+        let qi = 0;
+        function rotQuote() {
+            const q = $('quoteRot');
+            q.style.opacity = 0;
+            setTimeout(() => {
+                q.textContent = quotes[qi % quotes.length];
+                qi++;
+                q.style.opacity = 1;
+            }, 400);
+        }
+        rotQuote();
+        setInterval(rotQuote, 9000);
+
+        /* ---------- firmas (guestbook, en Supabase) ---------- */
+        async function fetchGB() {
+            const { data, error } = await sb.from('guestbook')
+                .select('*').order('created_at', { ascending: false }).limit(50);
+            if (error) { console.error(error); return []; }
+            return data;
+        }
+
+        async function renderGB() {
+            const entradas = await fetchGB();
+            const { data: { session } } = await sb.auth.getSession();
+            const list = $('gblist');
+            list.innerHTML = entradas.map(e =>
+                '<div class="gb-entry"><span class="who">' + esc(e.who) + ': </span>' + esc(e.msg) +
+                (session ? ' <button class="del" data-del-gb="' + e.id + '">✕</button>' : '') +
+                '</div>'
+            ).join('');
+        }
+        renderGB();
+
+        $('gbform').addEventListener('submit', async e => {
+            e.preventDefault();
+            const n = $('gbname').value.trim();
+            const m = $('gbmsg').value.trim();
+            if (!n || !m) return;
+            const { error } = await sb.from('guestbook').insert({ who: n, msg: m });
+            if (error) { toast('no se pudo firmar: ' + error.message); return; }
+            $('gbname').value = '';
+            $('gbmsg').value = '';
+            renderGB();
+            toast('firmado. ahora lo ve todo el mundo. 🖤');
+        });
+
+        /* ---------- SÓTANO (modo dueño) ---------- */
+        const vault = $('vault');
+
+        function abrirModal() {
+            $('pinModal').classList.add('show');
+            $('pinInput').value = '';
+            setTimeout(() => $('pinInput').focus(), 50);
+        }
+        function cerrarModal() {
+            $('pinModal').classList.remove('show');
+        }
+
+        function desbloquear() {
+            vault.classList.add('show');
+            renderPrivPosts();
+            renderPrivMedia();
+            renderPubAdmin();
+            renderGB();
+            actualizarCuota();
+            toast('sótano abierto. +15 minutos de sueño perdido.');
+        }
+
+        $('btnVault').addEventListener('click', abrirModal);
+        $('pinCancel').addEventListener('click', cerrarModal);
+
+        $('pinForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const pass = $('pinInput').value;
+            $('pinInput').value = '';
+            const { error } = await sb.auth.signInWithPassword({ email: OWNER_EMAIL, password: pass });
+            if (error) {
+                toast('la llave no da la vuelta. no es la correcta.');
+                return;
+            }
+            cerrarModal();
+            desbloquear();
+        });
+
+        $('btnLock').addEventListener('click', async () => {
+            vault.classList.remove('show');
+            await sb.auth.signOut();
+            renderGB();
+            toast('sótano cerrado. el humo queda adentro.');
+        });
+
+        function panel(name) {
+            $('diarioPane').classList.toggle('show', name === 'diario');
+            $('baulPane').classList.toggle('show', name === 'baul');
+            $('pubPane').classList.toggle('show', name === 'pub');
+            $('nowPane').classList.toggle('show', name === 'now');
+            $('tabDiario').classList.toggle('on', name === 'diario');
+            $('tabBaul').classList.toggle('on', name === 'baul');
+            $('tabPub').classList.toggle('on', name === 'pub');
+            $('tabNow').classList.toggle('on', name === 'now');
+        }
+        $('tabDiario').addEventListener('click', () => panel('diario'));
+        $('tabBaul').addEventListener('click', () => panel('baul'));
+        $('tabPub').addEventListener('click', () => panel('pub'));
+        $('tabNow').addEventListener('click', () => panel('now'));
+
+        /* =====================================================================
+           ADJUNTOS DEL DIARIO
+           Los archivos NO van a localStorage: una sola foto en base64 ya se
+           come el límite de ~5MB y rompe todo el sótano. Van a IndexedDB, que
+           guarda Blobs de verdad y tiene cuota de cientos de MB.
+           ===================================================================== */
+        const DB_NOMBRE = 'josu_sotano', DB_STORE = 'adjuntos';
+        let _db = null;
+
+        function db() {
+            if (_db) return Promise.resolve(_db);
+            return new Promise((res, rej) => {
+                const q = indexedDB.open(DB_NOMBRE, 1);
+                q.onupgradeneeded = () => {
+                    if (!q.result.objectStoreNames.contains(DB_STORE))
+                        q.result.createObjectStore(DB_STORE, { keyPath: 'id' });
+                };
+                q.onsuccess = () => { _db = q.result; res(_db); };
+                q.onerror = () => rej(q.error);
+            });
+        }
+
+        function dbOp(modo, fn) {
+            return db().then(d => new Promise((res, rej) => {
+                const tx = d.transaction(DB_STORE, modo);
+                const req = fn(tx.objectStore(DB_STORE));
+                tx.oncomplete = () => res(req && req.result);
+                tx.onerror = () => rej(tx.error);
+            }));
+        }
+
+        const guardarAdj = reg => dbOp('readwrite', st => st.put(reg));
+        const leerAdj = id => dbOp('readonly', st => st.get(id));
+        const borrarAdj = id => dbOp('readwrite', st => st.delete(id));
+
+        const nuevoId = () => 'a_' + Date.now().toString(36) + Math.random().toString(36).slice(2, 8);
+
+        /* Las fotos de celular pesan 3-8MB cada una. Se reescalan a 1600px y se
+           recomprimen antes de guardar: la misma foto baja a ~200-400KB y el
+           sótano aguanta cientos en vez de una docena. */
+        function reducirImagen(file) {
+            return new Promise(res => {
+                if (!/^image\//.test(file.type) || /gif/.test(file.type)) return res(file);
+                const url = URL.createObjectURL(file);
+                const im = new Image();
+                im.onload = () => {
+                    const MAX = 1600;
+                    let { width: w, height: h } = im;
+                    if (w <= MAX && h <= MAX && file.size < 500000) {
+                        URL.revokeObjectURL(url); return res(file);
+                    }
+                    const k = Math.min(1, MAX / Math.max(w, h));
+                    const c = document.createElement('canvas');
+                    c.width = Math.round(w * k); c.height = Math.round(h * k);
+                    c.getContext('2d').drawImage(im, 0, 0, c.width, c.height);
+                    c.toBlob(bl => {
+                        URL.revokeObjectURL(url);
+                        res(bl && bl.size < file.size ? bl : file);
+                    }, 'image/jpeg', .84);
+                };
+                im.onerror = () => { URL.revokeObjectURL(url); res(file); };
+                im.src = url;
+            });
+        }
+
+        function tipoDe(mime) {
+            if (/^image\//.test(mime)) return 'img';
+            if (/^video\//.test(mime)) return 'video';
+            if (/^audio\//.test(mime)) return 'audio';
+            return 'otro';
+        }
+
+        // archivos elegidos pero todavía no guardados (esperando "GUARDAR")
+        let pendientes = [];
+
+        async function agregarArchivos(lista) {
+            for (const f of lista) {
+                if (f.size > 120 * 1024 * 1024) {
+                    toast('«' + f.name + '» pesa demasiado (máx 120MB).');
+                    continue;
+                }
+                const blob = await reducirImagen(f);
+                pendientes.push({
+                    id: nuevoId(), blob: blob, nombre: f.name,
+                    mime: blob.type || f.type, kind: tipoDe(blob.type || f.type),
+                    peso: blob.size
+                });
+            }
+            renderPendientes();
+            actualizarCuota();
+        }
+
+        function renderPendientes() {
+            const c = $('ppPrev');
+            c.innerHTML = '';
+            pendientes.forEach(a => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                if (a.kind === 'img') {
+                    const im = document.createElement('img');
+                    im.src = URL.createObjectURL(a.blob);
+                    im.onload = () => URL.revokeObjectURL(im.src);
+                    chip.appendChild(im);
+                } else {
+                    chip.appendChild(document.createTextNode(a.kind === 'video' ? '🎞' : '🎵'));
+                }
+                const b = document.createElement('b');
+                b.textContent = a.nombre + ' (' + (a.peso / 1048576).toFixed(1) + 'MB)';
+                chip.appendChild(b);
+                const x = document.createElement('button');
+                x.type = 'button';
+                x.textContent = '✕';
+                x.onclick = () => {
+                    pendientes = pendientes.filter(z => z.id !== a.id);
+                    renderPendientes();
+                };
+                chip.appendChild(x);
+                c.appendChild(chip);
+            });
+        }
+
+        /* El navegador tarda en reflejar el espacio liberado en su propio
+           storage.estimate(), así que el "usado" se calcula sumando los
+           adjuntos que realmente hay guardados: es exacto y al instante. */
+        const listarAdj = () => dbOp('readonly', st => st.getAll());
+
+        async function actualizarCuota() {
+            const el = $('ppQuota');
+            if (!el) return;
+            try {
+                const todos = (await listarAdj()) || [];
+                const usado = todos.reduce((n, a) => n + (a.peso || (a.blob && a.blob.size) || 0), 0);
+                let txt = 'sótano: ' + todos.length + ' archivo(s) · ' +
+                    (usado / 1048576).toFixed(1) + ' MB';
+                if (navigator.storage && navigator.storage.estimate) {
+                    const e = await navigator.storage.estimate();
+                    if (e && e.quota) txt += ' de ~' + (e.quota / 1048576).toFixed(0) + ' MB disponibles';
+                }
+                el.textContent = txt;
+            } catch (err) { }
+        }
+
+        // arrastrar y soltar
+        (function () {
+            const drop = $('ppDrop');
+            if (!drop) return;
+            $('ppFiles').addEventListener('change', e => {
+                agregarArchivos([...e.target.files]);
+                e.target.value = '';
+            });
+            ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => {
+                e.preventDefault(); drop.classList.add('drag');
+            }));
+            ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => {
+                e.preventDefault(); drop.classList.remove('drag');
+            }));
+            drop.addEventListener('drop', e => {
+                if (e.dataTransfer && e.dataTransfer.files.length)
+                    agregarArchivos([...e.dataTransfer.files]);
+            });
+        })();
+
+        /* ---- visor a pantalla completa ---- */
+        function abrirVisor(nodo) {
+            const b = $('visorBody');
+            b.innerHTML = '';
+            b.appendChild(nodo);
+            $('visor').classList.add('show');
+        }
+        $('visorCerrar').addEventListener('click', () => {
+            $('visor').classList.remove('show');
+            $('visorBody').innerHTML = '';
+        });
+        $('visor').addEventListener('click', e => {
+            if (e.target.id === 'visor') $('visorCerrar').click();
+        });
+
+        /* ---- diario privado ---- */
+        let privPosts = store(K.posts);
+        if (privPosts === null || !Array.isArray(privPosts)) {
+            privPosts = [{
+                t: 'primera nota',
+                d: '27/08/2026',
+                tag: '#sótano',
+                body: 'esto es el sótano: cero visitas, cero expectativas. acá van las cosas que no quiero publicar, las medias verdades y los días que no sé explicar. bienvenido a vos mismo.'
+            }];
+            store(K.posts, privPosts);
+        }
+
+        const hoy = () => new Date().toLocaleDateString('es');
+
+        function renderPrivPosts() {
+            const c = $('privPosts');
+            if (!privPosts.length) {
+                c.innerHTML = '<p class="empty-hint">todavía no escribiste nada. arriba tenés el formulario.</p>';
+                return;
+            }
+            c.innerHTML = privPosts.map((p, i) =>
+                '<div class="prv-post">' +
+                '<div class="ph"><span class="pt">' + esc(p.t) + '</span><button class="del" data-del-post="' + i + '">✕</button></div>' +
+                '<div class="pb">' + esc(p.body) + '</div>' +
+                (p.adj && p.adj.length ? '<div class="adj-grid" data-adj="' + i + '"></div>' : '') +
+                '<div class="pd">' + esc(p.d || '') + ' ' + esc(p.tag || '') + '</div>' +
+                '</div>'
+            ).join('');
+            // los adjuntos se leen de IndexedDB: asíncrono, se rellenan después
+            privPosts.forEach((p, i) => {
+                if (p.adj && p.adj.length) pintarAdjuntos(p.adj, c.querySelector('[data-adj="' + i + '"]'));
+            });
+            actualizarCuota();
+        }
+
+        async function pintarAdjuntos(ids, cont) {
+            if (!cont) return;
+            for (const id of ids) {
+                let reg;
+                try { reg = await leerAdj(id); } catch (e) { continue; }
+                if (!reg) continue;
+                const url = URL.createObjectURL(reg.blob);
+                let el;
+                if (reg.kind === 'img') {
+                    el = document.createElement('img');
+                    el.src = url;
+                    el.loading = 'lazy';
+                    el.alt = reg.nombre || 'adjunto';
+                    el.addEventListener('click', () => {
+                        const big = document.createElement('img');
+                        big.src = url;
+                        abrirVisor(big);
+                    });
+                } else if (reg.kind === 'video') {
+                    el = document.createElement('video');
+                    el.src = url;
+                    el.controls = true;
+                    el.preload = 'metadata';
+                } else {
+                    el = document.createElement('audio');
+                    el.src = url;
+                    el.controls = true;
+                    el.preload = 'metadata';
+                }
+                cont.appendChild(el);
+            }
+        }
+
+        $('ppForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const t = $('ppTitle').value.trim();
+            const b = $('ppBody').value.trim();
+            if (!t || !b) return;
+
+            const ids = [];
+            try {
+                for (const a of pendientes) {
+                    await guardarAdj({
+                        id: a.id, blob: a.blob, nombre: a.nombre,
+                        mime: a.mime, kind: a.kind, peso: a.peso
+                    });
+                    ids.push(a.id);
+                }
+            } catch (err) {
+                // si el navegador se queda sin cuota, la nota igual se guarda
+                toast('no entró todo: el navegador se quedó sin espacio.');
+            }
+
+            privPosts.unshift({
+                t: t, body: b, tag: $('ppTag').value.trim() || '',
+                d: hoy(), adj: ids
+            });
+            // al recortar a 50 hay que borrar los archivos de las que se caen
+            const sobran = privPosts.slice(50);
+            sobran.forEach(pp => (pp.adj || []).forEach(id => borrarAdj(id).catch(() => { })));
+            privPosts = privPosts.slice(0, 50);
+            store(K.posts, privPosts);
+
+            pendientes = [];
+            renderPendientes();
+            $('ppTitle').value = '';
+            $('ppBody').value = '';
+            $('ppTag').value = '';
+            renderPrivPosts();
+            toast(ids.length ? 'nota guardada con ' + ids.length + ' adjunto(s).' : 'nota guardada en el sótano.');
+        });
+
+        /* ---- baúl de media ---- */
+        let privMedia = store(K.media);
+        if (privMedia === null || !Array.isArray(privMedia)) privMedia = [];
+
+        const YT_RE = /youtu(?:\.be|be\.com)/;
+
+        function clasificar(url) {
+            const u = url.toLowerCase().split('?')[0];
+            if (YT_RE.test(url.toLowerCase())) return 'video';
+            if (/\.(mp4|webm|mov|ogg)$/.test(u)) return 'video';
+            if (/\.(gif|jpe?g|png|webp|avif)$/.test(u)) return 'img';
+            if (/\.(mp3|wav|m4a|flac|aac)$/.test(u)) return 'audio';
+            return 'link';
+        }
+
+        function ytEmbed(u) {
+            let id = u.match(/[?&]v=([\w-]{11})/);
+            if (!id) id = /youtu\.be\/([\w-]{11})/.exec(u);
+            if (!id) id = /\/embed\/([\w-]{11})/.exec(u);
+            return id ? 'https://www.youtube.com/embed/' + id[1] : u;
+        }
+
+        function mediaHtml(m) {
+            const url = esc(m.url);
+            let prev = '';
+            if (m.kind === 'video' && YT_RE.test(m.url)) {
+                prev = '<iframe src="' + esc(ytEmbed(m.url)) + '" allowfullscreen title="video privado"></iframe>';
+            } else if (m.kind === 'video') {
+                prev = '<video controls preload="metadata" src="' + url + '"></video>';
+            } else if (m.kind === 'img') {
+                prev = '<img src="' + url + '" alt="' + esc(m.label || 'media') + '" loading="lazy">';
+            } else if (m.kind === 'audio') {
+                prev = '<audio controls preload="metadata" src="' + url + '"></audio>';
+            } else {
+                prev = '<a href="' + url + '" target="_blank" rel="noopener" style="color:var(--morado-neon)">abrir enlace →</a>';
+            }
+            return '<div class="media-item">' +
+                '<div class="ml"><span>' + esc(m.label || '— sin etiqueta —') + '</span><button class="del" data-del-media="' + m._i + '">✕</button></div>' +
+                prev +
+                '<div class="ms">' + url + '</div>' +
+                '</div>';
+        }
+
+        function renderPrivMedia() {
+            const c = $('privMedia');
+            if (!privMedia.length) {
+                c.innerHTML = '<p class="empty-hint">el baúl está vacío. pegá una URL de youtube, un gif o un mp3 arriba.</p>';
+                return;
+            }
+            c.innerHTML = privMedia.map((m, i) => mediaHtml(Object.assign({}, m, { _i: i }))).join('');
+        }
+
+        $('pmForm').addEventListener('submit', e => {
+            e.preventDefault();
+            const u = $('pmUrl').value.trim();
+            if (!u) return;
+            if (!/^https?:\/\//i.test(u)) {
+                toast('esa URL no arranca con http(s)://');
+                return;
+            }
+            privMedia.unshift({ url: u, label: $('pmLabel').value.trim(), kind: clasificar(u), d: hoy() });
+            store(K.media, privMedia);
+            $('pmUrl').value = '';
+            $('pmLabel').value = '';
+            renderPrivMedia();
+            toast('guardado en el baúl. nadie más lo ve.');
+        });
+
+        /* ---------- notas públicas (adjuntos como archivos reales, en Supabase Storage) ---------- */
+        async function fetchPosts() {
+            const { data, error } = await sb.from('posts')
+                .select('*').order('created_at', { ascending: false }).limit(100);
+            if (error) { console.error(error); return []; }
+            return data;
+        }
+
+        function pathDeUrlPublica(url) {
+            const marker = '/object/public/post-media/';
+            const idx = (url || '').indexOf(marker);
+            return idx === -1 ? null : url.slice(idx + marker.length);
+        }
+
+        function listaAdjuntos(p) {
+            // notas nuevas: p.attachments (array). notas viejas (antes de este cambio): p.attach_url suelto.
+            if (Array.isArray(p.attachments) && p.attachments.length) return p.attachments;
+            if (p.attach_url) return [{ kind: YT_RE.test(p.attach_url) ? 'youtube' : (p.attach_kind || clasificar(p.attach_url)), url: p.attach_url }];
+            return [];
+        }
+
+        function attachmentHtml(a) {
+            const u = esc(a.url);
+            if (a.kind === 'youtube') {
+                return '<iframe src="' + esc(ytEmbed(a.url)) + '" allowfullscreen title="adjunto"></iframe>';
+            }
+            if (a.kind === 'video') return '<video controls preload="metadata" src="' + u + '"></video>';
+            if (a.kind === 'img') return '<img src="' + u + '" alt="adjunto" loading="lazy">';
+            if (a.kind === 'audio') return '<audio controls preload="metadata" src="' + u + '"></audio>';
+            return '<a href="' + u + '" target="_blank" rel="noopener" style="color:var(--morado-neon)">📎 ver adjunto →</a>';
+        }
+
+        function adjuntosHtml(p) {
+            const items = listaAdjuntos(p);
+            if (!items.length) return '';
+            return '<div class="post-attach">' + items.map(attachmentHtml).join('') + '</div>';
+        }
+
+        function pubPostHtml(p) {
+            const tags = (p.tag || '').split(/\s+/).filter(Boolean)
+                .map(t => '<span class="tag">' + esc(t) + '</span>').join('');
+            const fecha = new Date(p.created_at).toLocaleString('es', { dateStyle: 'medium', timeStyle: 'short' });
+            return '<article class="post">' +
+                '<div class="fecha">📅 ' + esc(fecha) + '</div>' +
+                '<h2>' + esc(p.title) + '</h2>' +
+                tags +
+                '<p>' + esc(p.body).replace(/\n/g, '<br>') + '</p>' +
+                adjuntosHtml(p) +
+                '</article><div class="divider">✶ ✶ ✶</div>';
+        }
+
+        async function renderPubPosts() {
+            const posts = await fetchPosts();
+            $('postsPub').innerHTML = posts.map(pubPostHtml).join('');
+        }
+        renderPubPosts();
+
+        async function renderPubAdmin() {
+            const posts = await fetchPosts();
+            const c = $('pubPostsAdmin');
+            if (!posts.length) {
+                c.innerHTML = '<p class="empty-hint">todavía no publicaste ninguna nota.</p>';
+                return;
+            }
+            c.innerHTML = posts.map(p => {
+                const n = listaAdjuntos(p).length;
+                return '<div class="prv-post">' +
+                    '<div class="ph"><span class="pt">' + esc(p.title) + '</span><button class="del" data-del-pub="' + p.id + '">✕</button></div>' +
+                    '<div class="pb">' + esc(p.body) + '</div>' +
+                    '<div class="pd">' + esc(new Date(p.created_at).toLocaleString('es')) + ' ' + esc(p.tag || '') + (n ? ' · 📎 ' + n + ' adjunto(s)' : '') + '</div>' +
+                    '</div>';
+            }).join('');
+        }
+
+        /* archivos elegidos para la nota pública, esperando el submit */
+        let pubPendientes = [];
+
+        function pubRenderPendientes() {
+            const c = $('pubPrev');
+            c.innerHTML = '';
+            pubPendientes.forEach(a => {
+                const chip = document.createElement('div');
+                chip.className = 'chip';
+                if (a.kind === 'img') {
+                    const im = document.createElement('img');
+                    im.src = URL.createObjectURL(a.file);
+                    im.onload = () => URL.revokeObjectURL(im.src);
+                    chip.appendChild(im);
+                } else {
+                    chip.appendChild(document.createTextNode(a.kind === 'video' ? '🎞' : '🎵'));
+                }
+                const b = document.createElement('b');
+                b.textContent = a.file.name + ' (' + (a.file.size / 1048576).toFixed(1) + 'MB)';
+                chip.appendChild(b);
+                const x = document.createElement('button');
+                x.type = 'button';
+                x.textContent = '✕';
+                x.onclick = () => {
+                    pubPendientes = pubPendientes.filter(z => z.id !== a.id);
+                    pubRenderPendientes();
+                };
+                chip.appendChild(x);
+                c.appendChild(chip);
+            });
+        }
+
+        function pubAgregarArchivos(lista) {
+            for (const f of lista) {
+                if (f.size > 50 * 1024 * 1024) {
+                    toast('«' + f.name + '» pesa demasiado (máx 50MB).');
+                    continue;
+                }
+                const kind = tipoDe(f.type);
+                if (kind === 'otro') {
+                    toast('«' + f.name + '» no es imagen, video ni audio.');
+                    continue;
+                }
+                pubPendientes.push({ id: nuevoId(), file: f, kind: kind });
+            }
+            pubRenderPendientes();
+        }
+
+        (function () {
+            const drop = $('pubDrop');
+            if (!drop) return;
+            $('pubFiles').addEventListener('change', e => {
+                pubAgregarArchivos([...e.target.files]);
+                e.target.value = '';
+            });
+            ['dragenter', 'dragover'].forEach(ev => drop.addEventListener(ev, e => {
+                e.preventDefault(); drop.classList.add('drag');
+            }));
+            ['dragleave', 'drop'].forEach(ev => drop.addEventListener(ev, e => {
+                e.preventDefault(); drop.classList.remove('drag');
+            }));
+            drop.addEventListener('drop', e => {
+                if (e.dataTransfer && e.dataTransfer.files.length) pubAgregarArchivos([...e.dataTransfer.files]);
+            });
+        })();
+
+        async function subirArchivo(file) {
+            const ext = (file.name.split('.').pop() || 'bin').toLowerCase().replace(/[^a-z0-9]/g, '') || 'bin';
+            const path = crypto.randomUUID() + '.' + ext;
+            const { error } = await sb.storage.from('post-media').upload(path, file, { cacheControl: '3600', upsert: false });
+            if (error) throw error;
+            const { data } = sb.storage.from('post-media').getPublicUrl(path);
+            return data.publicUrl;
+        }
+
+        $('pubForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const t = $('pubTitle').value.trim();
+            const b = $('pubBody').value.trim();
+            if (!t || !b) return;
+
+            const yt = $('pubYoutubeUrl').value.trim();
+            const attachments = [];
+            if (yt) attachments.push({ kind: 'youtube', url: yt });
+
+            let subieron = 0;
+            for (const a of pubPendientes) {
+                try {
+                    const url = await subirArchivo(a.file);
+                    attachments.push({ kind: a.kind, url: url });
+                    subieron++;
+                } catch (err) {
+                    toast('no se pudo subir «' + a.file.name + '»: ' + err.message);
+                }
+            }
+
+            const { error } = await sb.from('posts').insert({
+                title: t, body: b, tag: $('pubTag').value.trim() || '', attachments: attachments
+            });
+            if (error) { toast('no se pudo publicar: ' + error.message); return; }
+            $('pubTitle').value = '';
+            $('pubBody').value = '';
+            $('pubTag').value = '';
+            $('pubYoutubeUrl').value = '';
+            pubPendientes = [];
+            pubRenderPendientes();
+            await renderPubPosts();
+            await renderPubAdmin();
+            toast('nota publicada' + (subieron ? ' con ' + subieron + ' adjunto(s)' : '') + '. 🖤');
+        });
+
+        /* ---------- ahora escuchando (en Supabase) ---------- */
+        async function fetchNowPlaying() {
+            const { data, error } = await sb.from('now_playing').select('*').eq('id', 1).single();
+            if (error) { console.error(error); return null; }
+            return data;
+        }
+
+        async function renderNowPlaying() {
+            const np = await fetchNowPlaying();
+            const box = $('nowPlayingBox');
+            if (!np || !np.label) {
+                box.style.display = 'none';
+                return;
+            }
+            box.style.display = 'block';
+            let html = '<div class="estado-linea">🎵 <b>' + esc(np.label) + '</b></div>';
+            if (np.url) {
+                html += '<div class="small" style="margin-top:6px;"><a href="' + esc(np.url) +
+                    '" target="_blank" rel="noopener" style="color:var(--morado-neon)">▶ ver en youtube</a></div>';
+            }
+            $('nowPlayingBody').innerHTML = html;
+        }
+        renderNowPlaying();
+
+        $('nowForm').addEventListener('submit', async e => {
+            e.preventDefault();
+            const label = $('nowLabel').value.trim();
+            if (!label) return;
+            const { error } = await sb.from('now_playing').update({
+                label: label, url: $('nowUrl').value.trim() || null, updated_at: new Date().toISOString()
+            }).eq('id', 1);
+            if (error) { toast('no se pudo actualizar: ' + error.message); return; }
+            $('nowLabel').value = '';
+            $('nowUrl').value = '';
+            await renderNowPlaying();
+            toast('estado actualizado. 🎧');
+        });
+
+        $('nowClear').addEventListener('click', async () => {
+            const { error } = await sb.from('now_playing').update({ label: null, url: null }).eq('id', 1);
+            if (!error) { await renderNowPlaying(); toast('estado apagado.'); }
+        });
+
+        document.addEventListener('click', async e => {
+            const dp = e.target.closest('[data-del-post]');
+            if (dp) {
+                const [muerta] = privPosts.splice(+dp.dataset.delPost, 1);
+                store(K.posts, privPosts);
+                renderPrivPosts();
+                // sin esto los archivos quedaban ocupando espacio para siempre.
+                // se espera a que terminen para recién ahí releer el espacio libre.
+                if (muerta && muerta.adj && muerta.adj.length) {
+                    Promise.all(muerta.adj.map(id => borrarAdj(id).catch(() => { })))
+                        .then(() => setTimeout(actualizarCuota, 350));
+                }
+                return;
+            }
+            const dm = e.target.closest('[data-del-media]');
+            if (dm) {
+                privMedia.splice(+dm.dataset.delMedia, 1);
+                store(K.media, privMedia);
+                renderPrivMedia();
+                return;
+            }
+            const dpub = e.target.closest('[data-del-pub]');
+            if (dpub) {
+                const id = dpub.dataset.delPub;
+                const { data: fila } = await sb.from('posts').select('attachments, attach_url').eq('id', id).single();
+                const { error } = await sb.from('posts').delete().eq('id', id);
+                if (!error) {
+                    const items = (fila && Array.isArray(fila.attachments) && fila.attachments.length)
+                        ? fila.attachments : (fila && fila.attach_url ? [{ url: fila.attach_url }] : []);
+                    const paths = items.map(a => pathDeUrlPublica(a.url)).filter(Boolean);
+                    if (paths.length) sb.storage.from('post-media').remove(paths).catch(() => { });
+                    await renderPubPosts();
+                    await renderPubAdmin();
+                }
+                return;
+            }
+            const dgb = e.target.closest('[data-del-gb]');
+            if (dgb) {
+                const { error } = await sb.from('guestbook').delete().eq('id', dgb.dataset.delGb);
+                if (!error) await renderGB();
+            }
+        });
+    </script>
+</body>
+
+</html>
